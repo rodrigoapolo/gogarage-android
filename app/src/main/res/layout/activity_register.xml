@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".RegisterActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/welcome"
+                android:textColor="@color/blue_700"
+                android:textSize="42sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:inputType="number"
+                android:hint="@string/email"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:inputType="number"
+                android:hint="@string/password"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:inputType="number"
+                android:hint="@string/confirm_password"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:hint="@string/name"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:inputType="number"
+                android:hint="@string/cpf"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:hint="@string/gender"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="16sp"
+                android:textColor="@color/blue_700"
+                android:inputType="number"
+                android:hint="@string/telephone"/>
+
+            <Button
+                android:id="@+id/button_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:padding="16dp"
+                android:backgroundTint="@color/blue_700"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:text="@string/confirm" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_txt_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:gravity="right"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@string/have_count"
+                    android:textColor="@color/blue_700"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="1"
+                    android:text="@string/enter"
+                    android:textColor="@color/green_200"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_txt_login"
+                    app:layout_constraintTop_toTopOf="@id/text_txt_login" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+</ScrollView>
