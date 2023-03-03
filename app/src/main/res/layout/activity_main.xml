@@ -4,32 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text_title_go"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/title_go"
-        android:textColor="@color/blue_700"
-        android:textSize="42sp"
+        android:layout_marginTop="150dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text_title_garage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_light"
-        android:text="@string/title_garage"
-        android:textColor="@color/blue_700"
-        android:textSize="42sp"
-        app:layout_constraintStart_toEndOf="@id/text_title_go"
-        app:layout_constraintTop_toTopOf="@id/text_title_go" />
+        <TextView
+            android:id="@+id/text_title_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/title_go"
+            android:textColor="@color/blue_700"
+            android:textSize="42sp" />
+
+        <TextView
+            android:id="@+id/text_title_garage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/title_garage"
+            android:textColor="@color/blue_700"
+            android:textSize="42sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/text_title_two"
@@ -39,34 +43,27 @@
         android:text="@string/title_two"
         android:textColor="@color/blue_700"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@id/text_title_go"
-        app:layout_constraintTop_toBottomOf="@id/text_title_go" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageView
         android:id="@+id/image_world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
         android:src="@drawable/ic_world"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_title_two" />
 
-    <Button
-        android:id="@+id/btn_lets_started"
-        android:layout_width="0dp"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_world"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:backgroundTint="@color/blue_700"
-        android:fontFamily="@font/roboto_bold"
-        android:textSize="18sp"
-        android:textAllCaps="false"
-        android:text="@string/botton_lets_start" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_world" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

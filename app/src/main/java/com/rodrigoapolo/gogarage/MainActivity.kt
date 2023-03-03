@@ -3,7 +3,9 @@ package com.rodrigoapolo.gogarage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.rodrigoapolo.gogarage.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        binding.btnLetsStarted.setOnClickListener {
+        Handler().postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        }
+        }, 2000)
 
         return setContentView(binding.root)
     }
