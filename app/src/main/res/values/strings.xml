@@ -11,7 +11,7 @@
     <string name="register">Cadastre-se</string>
     <string name="txt_register">Ainda não tem conta?</string>
     <string name="welcome">Olá, queremos te conhecer</string>
-    <string name="confirm_password">Confirmar sua senhar:</string>
+    <string name="confirm_password">Confirme sua senha</string>
     <string name="name">Nome</string>
     <string name="cpf">CPF</string>
     <string name="gender">Gênero</string>
