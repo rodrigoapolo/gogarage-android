@@ -5,6 +5,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
+import com.rodrigoapolo.gogarage.validation.Cpf
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -81,8 +82,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateCPF() {
         if (binding.cpfEditText.text.isNullOrEmpty()) {
-            binding.cpfContainer.helperText = "Nome inválido"
-        } else {
+            binding.cpfContainer.helperText = "CPF inválido"
+        } else if (!Cpf.isCPF(binding.cpfEditText.text.toString())){
+            binding.cpfContainer.helperText = "CPF inválido"
+        }else{
             binding.cpfContainer.helperText = null
         }
     }
