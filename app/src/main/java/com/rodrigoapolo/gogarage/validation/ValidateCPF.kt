@@ -1,6 +1,6 @@
 package com.rodrigoapolo.gogarage.validation
 
-class Cpf {
+class ValidateCPF {
     companion object {
 
         fun isCPF(cpf : String) : Boolean{
