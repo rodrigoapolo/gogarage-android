@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityLoginBinding
-import com.rodrigoapolo.gogarage.model.User
+import com.rodrigoapolo.gogarage.model.LoginResponse
 import com.rodrigoapolo.gogarage.model.UserLogin
 import com.rodrigoapolo.gogarage.util.NetworkUtils
 import retrofit2.Call
@@ -45,13 +45,19 @@ class LoginActivity : AppCompatActivity() {
         val callback = endpoint.authenticate(
             userLogin
         )
-        Log.i("requestAPI", userLogin.toString())
-        callback.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                Log.i("requestAPI", response.body().toString() + "sucesso")
+
+        callback.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val intent = Intent(applicationContext, HomeActivity::class.java)
+                    intent.putExtra("id", response.body()?.id.toString())
+                    startActivity(intent)
+                } else {
+                    // TODO Tratar error
+                }
             }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.i("requestAPI", t.toString() + "error")
             }
         })
