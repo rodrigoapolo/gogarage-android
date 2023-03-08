@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingBottom="32dp"
     tools:context=".RegisterActivity">
 
     <LinearLayout
@@ -19,7 +21,7 @@
             android:layout_marginBottom="50dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/welcome"
-            android:textColor="@color/blue_700"
+            android:textColor="@color/blue_500"
             android:textSize="42sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -44,8 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/password"
-            app:counterEnabled="true"
-            app:counterMaxLength="8"
             app:errorEnabled="true"
             app:helperTextTextColor="@color/red"
             app:passwordToggleEnabled="true">
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/blue_700"
+            android:backgroundTint="@color/blue_500"
             android:fontFamily="@font/roboto_bold"
             android:padding="16dp"
             android:text="@string/confirm"
