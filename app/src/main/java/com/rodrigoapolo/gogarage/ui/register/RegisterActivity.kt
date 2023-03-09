@@ -1,11 +1,11 @@
-package com.rodrigoapolo.gogarage
+package com.rodrigoapolo.gogarage.ui.register
 
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
-import com.rodrigoapolo.gogarage.validation.ValidateCPF
+import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
 
 class RegisterActivity : AppCompatActivity() {
 
