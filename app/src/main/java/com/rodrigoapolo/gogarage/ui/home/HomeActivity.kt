@@ -1,4 +1,4 @@
-package com.rodrigoapolo.gogarage
+package com.rodrigoapolo.gogarage.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
