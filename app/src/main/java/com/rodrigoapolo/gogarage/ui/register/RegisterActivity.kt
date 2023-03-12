@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
+import com.rodrigoapolo.gogarage.model.ResponseRegister
+import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
 import retrofit2.Callback
 import com.rodrigoapolo.gogarage.util.NetworkUtils
@@ -144,6 +146,18 @@ class RegisterActivity : AppCompatActivity() {
             binding.cpfContainer.helperText == null &&
             binding.phoneContainer.helperText == null
         ) {
+            register(
+                User(
+                    null,
+                    binding.nameEditText.text.toString(),
+                    binding.emailEditText.text.toString(),
+                    binding.passwordEditText.text.toString(),
+                    binding.phoneEditText.text.toString(),
+                    true,
+                    binding.cpfEditText.text.toString(),
+                    "",
+                )
+            )
             Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "bad", Toast.LENGTH_SHORT).show()
@@ -172,6 +186,27 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<UserEmail>, t: Throwable) {
                 Log.i("validateEmail", t.toString())
+            }
+
+        })
+    }
+
+    private fun register(user: User) {
+        val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.13:8080")
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+
+        val callback = endpoint.register(user)
+
+        callback.enqueue(object : Callback<ResponseRegister> {
+            override fun onResponse(
+                call: Call<ResponseRegister>,
+                response: Response<ResponseRegister>
+            ) {
+                Log.i("register", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
+                Log.i("register", t.toString())
             }
 
         })

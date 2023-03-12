@@ -3,6 +3,7 @@ package com.rodrigoapolo.gogarage.ui.login
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.rodrigoapolo.gogarage.databinding.ActivityLoginBinding
 import com.rodrigoapolo.gogarage.ui.home.HomeActivity
@@ -19,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         createListenerData()
-
         setObserver()
 
         return setContentView(binding.root)
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun createListenerData() {
+    private fun createListenerData() {
         binding.editEmail.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 viewModel.validEmail(binding.editEmail)
