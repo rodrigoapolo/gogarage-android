@@ -5,6 +5,8 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
 import com.rodrigoapolo.gogarage.model.ResponseRegister
@@ -23,7 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
-
+        window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
         createListenerData()
 
         binding

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.databinding.ActivityLoginBinding
 import com.rodrigoapolo.gogarage.ui.home.HomeActivity
 import com.rodrigoapolo.gogarage.ui.register.RegisterActivity
@@ -18,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
+        window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
         createListenerData()
         setObserver()
 
