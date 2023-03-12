@@ -1,11 +1,18 @@
 package com.rodrigoapolo.gogarage.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
+import com.rodrigoapolo.gogarage.model.UserEmail
+import retrofit2.Callback
+import com.rodrigoapolo.gogarage.util.NetworkUtils
 import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
+import retrofit2.Call
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -83,9 +90,9 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateCPF() {
         if (binding.cpfEditText.text.isNullOrEmpty()) {
             binding.cpfContainer.helperText = "CPF inválido"
-        } else if (!ValidateCPF.isCPF(binding.cpfEditText.text.toString())){
+        } else if (!ValidateCPF.isCPF(binding.cpfEditText.text.toString())) {
             binding.cpfContainer.helperText = "CPF inválido"
-        }else{
+        } else {
             binding.cpfContainer.helperText = null
         }
     }
@@ -101,11 +108,12 @@ class RegisterActivity : AppCompatActivity() {
     private fun validEmail() {
         val emailText = binding.emailEditText.text.toString()
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches() || emailText.isEmpty()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()
+            || emailText.isEmpty()
+        ) {
             binding.emailContainer.helperText = "E-mail inválido"
         } else {
-            binding.emailContainer.helperText = null
-
+            validateEmailRequest(emailText)
         }
     }
 
@@ -136,11 +144,36 @@ class RegisterActivity : AppCompatActivity() {
             binding.cpfContainer.helperText == null &&
             binding.phoneContainer.helperText == null
         ) {
-//            val intent = Intent(this, HomeActivity::class.java)
-//            startActivity(intent)
             Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "bad", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun validateEmailRequest(email: String) {
+        val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.13:8080")
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val userEmail = UserEmail(email)
+
+        val callback = endpoint.validateEmail(
+            userEmail
+        )
+
+        callback.enqueue(object : Callback<UserEmail> {
+            override fun onResponse(call: Call<UserEmail>, response: Response<UserEmail>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.email == email) {
+                        binding.emailContainer.helperText = "E-mail já cadastrado"
+                    }
+                } else {
+                    binding.emailContainer.helperText = null
+                }
+            }
+
+            override fun onFailure(call: Call<UserEmail>, t: Throwable) {
+                Log.i("validateEmail", t.toString())
+            }
+
+        })
     }
 }
