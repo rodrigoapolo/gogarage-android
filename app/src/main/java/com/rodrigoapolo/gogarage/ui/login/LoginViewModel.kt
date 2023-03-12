@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.textfield.TextInputEditText
+import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.model.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.model.dto.UserLoginDTO
@@ -42,7 +43,7 @@ class LoginViewModel : ViewModel(){
 
     fun doLogin(email: TextInputEditText, password: TextInputEditText){
         if (_email.value == null && _password.value == null) {
-            val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.13:8080")
+            val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
             val endpoint = retrofitClient.create(Endpoint::class.java)
 
             val userLoginDTO = UserLoginDTO(

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.R.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
@@ -173,7 +174,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateEmailRequest(email: String) {
-        val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.13:8080")
+        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val userEmail = UserEmail(email)
 
@@ -200,7 +201,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register(user: User) {
-        val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.13:8080")
+        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
         val endpoint = retrofitClient.create(Endpoint::class.java)
 
         val callback = endpoint.register(user)
