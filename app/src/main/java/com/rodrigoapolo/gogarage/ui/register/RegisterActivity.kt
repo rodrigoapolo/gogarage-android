@@ -1,17 +1,22 @@
 package com.rodrigoapolo.gogarage.ui.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.R.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
 import com.rodrigoapolo.gogarage.model.ResponseRegister
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
+import com.rodrigoapolo.gogarage.ui.login.LoginActivity
 import retrofit2.Callback
 import com.rodrigoapolo.gogarage.util.NetworkUtils
 import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
@@ -160,6 +165,7 @@ class RegisterActivity : AppCompatActivity() {
                     "",
                 )
             )
+            createDialog()
             Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "bad", Toast.LENGTH_SHORT).show()
@@ -212,5 +218,22 @@ class RegisterActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun createDialog() {
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_register_success, null, false)
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(view)
+
+        view.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
+            successRegister()
+        }
+
+        dialog.show()
+    }
+
+    private fun successRegister() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }
