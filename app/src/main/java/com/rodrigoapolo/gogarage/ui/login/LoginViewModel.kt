@@ -42,7 +42,7 @@ class LoginViewModel : ViewModel(){
 
     fun doLogin(email: TextInputEditText, password: TextInputEditText){
         if (_email.value == null && _password.value == null) {
-            val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.16:8080")
+            val retrofitClient = NetworkUtils.getRetrofitInstance("http://192.168.1.13:8080")
             val endpoint = retrofitClient.create(Endpoint::class.java)
 
             val userLoginDTO = UserLoginDTO(
