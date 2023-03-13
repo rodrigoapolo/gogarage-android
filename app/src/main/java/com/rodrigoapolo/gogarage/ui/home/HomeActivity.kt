@@ -12,12 +12,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
-        val extras = intent.extras
-
-        if (extras != null) {
-            binding.textView.text = extras.getString("id")
-        }
-
         return setContentView(binding.root)
     }
 }

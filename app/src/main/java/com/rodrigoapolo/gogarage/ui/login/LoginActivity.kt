@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.response().observe(this) {
             var intent = Intent(applicationContext, HomeActivity::class.java)
-            intent.putExtra("id", it)
             startActivity(intent)
         }
     }
