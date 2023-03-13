@@ -2,10 +2,12 @@ package com.rodrigoapolo.gogarage.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.garage.Address
 import com.rodrigoapolo.gogarage.model.garage.Garage
+import com.rodrigoapolo.gogarage.ui.home.recyclerview.ItemAdapter
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,6 +20,11 @@ class HomeActivity : AppCompatActivity() {
 
         listGarage = mutableListOf()
         populate()
+
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(applicationContext, 1)
+            adapter = ItemAdapter(listGarage)
+        }
 
         return setContentView(binding.root)
     }
