@@ -23,6 +23,13 @@
             android:text="Vamos conhecer melhor sua garagem"
             android:textColor="@color/blue_500"
             android:textSize="42sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/time_start_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:errorEnabled="true"
+            app:helperTextTextColor="@color/red">
 
         <Button
             android:id="@+id/time_start"
@@ -37,11 +44,21 @@
             android:textColorHint="@color/white"
             android:textSize="18sp" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/time_end_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:errorEnabled="true"
+            app:helperTextTextColor="@color/red">
+
         <Button
             android:id="@+id/time_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+
             android:backgroundTint="@color/green_200"
             android:fontFamily="@font/roboto_light"
             android:hint="Horario Termino"
@@ -50,6 +67,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="18sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/time_value_container"

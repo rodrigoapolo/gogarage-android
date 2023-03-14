@@ -18,5 +18,17 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
         viewModel = ViewModelProvider(this)[RegisterAddressGarageViewModel::class.java]
         setContentView(binding.root)
+
+
+        createListenerData()
+        setObserver()
+    }
+
+    private fun setObserver() {
+
+    }
+
+    private fun createListenerData() {
+
     }
 }
