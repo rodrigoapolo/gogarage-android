@@ -8,6 +8,7 @@ import com.rodrigoapolo.gogarage.model.dto.UserLoginDTO
 import com.rodrigoapolo.gogarage.model.garage.Bairro
 import com.rodrigoapolo.gogarage.model.garage.Garage
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -31,7 +32,7 @@ interface Endpoint {
     ) : Call<ResponseRegister>
 
     @GET("/garagens/get-bairro/{bairro}")
-    fun getGarage(
+    suspend fun getGarage(
         @Path("bairro") bairro: String
-    ) : Call<List<Garage>>
+    ) : Response<List<Garage>>
 }
