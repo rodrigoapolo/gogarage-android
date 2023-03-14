@@ -28,4 +28,8 @@ interface Endpoint {
         @Body user: User
     ) : Call<ResponseRegister>
 
+//    @GET("/garagens/get-bairro/")
+//    fun getGarage() {
+//
+//    }
 }

@@ -1,22 +1,23 @@
 package com.rodrigoapolo.gogarage.model.garage
 
+import com.google.gson.annotations.SerializedName
 import com.rodrigoapolo.gogarage.model.User
 
 data class Garage(
-    var id: Long,
-    var cobertura: Boolean,
-    var foto: String,
-    var horarioInicio: String,
-    var horarioTermino: String,
-    var taxaHorario: Double,
-    var valorHora: Double,
-    var alturaVaga: Double,
-    var larguraVaga: Double,
-    var disponibilidade: Boolean,
-    var status: Boolean,
-    var situacao: Int,
-    var latitude: String,
-    var longitude: String,
-    var endereco: Address,
-    var pessoa: User
+    @SerializedName("id") var id: Long,
+    @SerializedName("cobertura") var cobertura: Boolean,
+    @SerializedName("foto") var foto: String,
+    @SerializedName("horarioInicio") var horarioInicio: String,
+    @SerializedName("horarioTermino") var horarioTermino: String,
+    @SerializedName("taxaHorario") var taxaHorario: Double,
+    @SerializedName("valorHora") var valorHora: Double,
+    @SerializedName("alturaVaga") var alturaVaga: Double,
+    @SerializedName("larguraVaga") var larguraVaga: Double,
+    @SerializedName("disponibilidade") var disponibilidade: Boolean,
+    @SerializedName("status") var status: Boolean,
+    @SerializedName("situacao") var situacao: Int,
+    @SerializedName("latitude") var latitude: String,
+    @SerializedName("longitude") var longitude: String,
+    @SerializedName("endereco") var endereco: Address,
+    @SerializedName("pessoa") var pessoa: User
 )
