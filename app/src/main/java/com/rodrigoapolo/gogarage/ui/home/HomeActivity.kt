@@ -41,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelProvider(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
+        viewModel.getGarage("Jardim Débora")
         viewModel.responseGarage.observe(this) { response ->
             if (response.isSuccessful) {
                 listGarage = response.body() as MutableList<Garage>
