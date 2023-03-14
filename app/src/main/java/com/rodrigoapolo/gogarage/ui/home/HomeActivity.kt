@@ -41,20 +41,15 @@ class HomeActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelProvider(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
-        viewModel.getGarage("Jardim Débora")
         viewModel.responseGarage.observe(this) { response ->
             if (response.isSuccessful) {
-                Log.i("garageLocal", response.body().toString() + "RESPONSE")
                 listGarage = response.body() as MutableList<Garage>
+                binding.recyclerView.apply {
+                    layoutManager = GridLayoutManager(applicationContext, 1)
+                    adapter = ItemAdapter(listGarage)
+                }
             }
         }
-
-        binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(applicationContext, 1)
-            adapter = ItemAdapter(listGarage)
-        }
-
-        // TODO FAZER APARECER OS DADOS NO RECYCLER-VIEW
 
         return setContentView(binding.root)
     }
