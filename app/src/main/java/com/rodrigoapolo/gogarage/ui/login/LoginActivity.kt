@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.databinding.ActivityLoginBinding
 import com.rodrigoapolo.gogarage.ui.home.HomeActivity
-import com.rodrigoapolo.gogarage.ui.register.RegisterActivity
+import com.rodrigoapolo.gogarage.ui.registerUser.RegisterUserActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.textRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, RegisterUserActivity::class.java)
             startActivity(intent)
         }
     }

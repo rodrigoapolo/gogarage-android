@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingBottom="32dp"
+    tools:context=".ui.registerGaragem.RegisterGaragemActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Vamos conhecer melhor sua garagem"
+            android:textColor="@color/blue_500"
+            android:textSize="42sp" />
+
+        <Button
+            android:id="@+id/time_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green_200"
+            android:fontFamily="@font/roboto_light"
+            android:hint="Horario Inicio"
+            android:padding="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/time_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/green_200"
+            android:fontFamily="@font/roboto_light"
+            android:hint="Horario Termino"
+            android:padding="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="18sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/time_value_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:hint="Valor da Hora"
+            app:errorEnabled="true"
+            app:helperTextTextColor="@color/red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/time_value_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/time_rate_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Taxa da Hora"
+            app:errorEnabled="true"
+            app:helperTextTextColor="@color/red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/time_rate_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/garage_height_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Altura da Garagem"
+            app:errorEnabled="true"
+            app:helperTextTextColor="@color/red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/garage_height_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/garage_width_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Largura da Garagem"
+            app:errorEnabled="true"
+            app:helperTextTextColor="@color/red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/garage_width_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_roof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="Cobertura"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/blue_500"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="16dp"
+            android:text="Continuar"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>
