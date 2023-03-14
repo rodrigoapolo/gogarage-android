@@ -1,26 +1,30 @@
 package com.rodrigoapolo.gogarage.ui.home
 
-import android.Manifest
 import android.Manifest.*
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.R
+import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.garage.Address
+import com.rodrigoapolo.gogarage.model.garage.Bairro
 import com.rodrigoapolo.gogarage.model.garage.Garage
+import com.rodrigoapolo.gogarage.model.garage.Situacao
 import com.rodrigoapolo.gogarage.ui.home.recyclerview.ItemAdapter
-import java.io.IOException
+import com.rodrigoapolo.gogarage.util.NetworkUtils
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
@@ -38,12 +42,13 @@ class HomeActivity : AppCompatActivity() {
         getLocationUser()
 
         listGarage = mutableListOf()
-        populate()
 
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(applicationContext, 1)
             adapter = ItemAdapter(listGarage)
         }
+
+        getGarage()
 
         return setContentView(binding.root)
     }
@@ -76,48 +81,28 @@ class HomeActivity : AppCompatActivity() {
         return address.substringAfter("- ").substringBefore(",")
     }
 
-    private fun populate() {
-        val garage1 = Garage(
-            0,
-            true,
-            "http//teste",
-            "8:00",
-            "20:00",
-            12.0,
-            30.0,
-            12.3,
-            8.2,
-            disponibilidade = false,
-            status = true,
-            situacao = 1,
-            latitude = "0.0000",
-            longitude = "1.0000",
-            endereco = Address(
-                "Rua Penápolis, 394",
-                "08564-200",
-                "",
-                "Vila Coqueral",
-                "Poá",
-                "SP",
-                "394"
-            ),
-            pessoa = User(
-                id = 0,
-                name = "Gabriel",
-                email = "gabriel.contato2013@outlook.com",
-                password = "123456",
-                phone = "11977527475",
-                status = true,
-                cpf = "12345678912",
-                cnpj = ""
-            )
+    private fun getGarage() {
+        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
+        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val village = "Jardim"
+
+        val callback = endpoint.getGarage(
+            village
         )
 
-        listGarage.add(garage1)
-        listGarage.add(garage1)
-        listGarage.add(garage1)
-        listGarage.add(garage1)
-        listGarage.add(garage1)
+        callback.enqueue(object : Callback<List<Garage>> {
+            override fun onResponse(call: Call<List<Garage>>, response: Response<List<Garage>>) {
+                if (response.isSuccessful) {
+                    Log.i("garageLocal", response.body().toString())
+                } else {
+                    Log.i("garageLocal", response.body().toString())
+                }
+            }
 
+            override fun onFailure(call: Call<List<Garage>>, t: Throwable) {
+                Log.i("garageLocal", t.toString())
+            }
+
+        })
     }
 }

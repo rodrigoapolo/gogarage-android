@@ -15,7 +15,7 @@ data class Garage(
     @SerializedName("larguraVaga") var larguraVaga: Double,
     @SerializedName("disponibilidade") var disponibilidade: Boolean,
     @SerializedName("status") var status: Boolean,
-    @SerializedName("situacao") var situacao: Int,
+    @SerializedName("situacao") var situacao: Situacao,
     @SerializedName("latitude") var latitude: String,
     @SerializedName("longitude") var longitude: String,
     @SerializedName("endereco") var endereco: Address,

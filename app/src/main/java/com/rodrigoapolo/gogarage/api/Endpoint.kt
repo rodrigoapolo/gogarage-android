@@ -5,11 +5,13 @@ import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
 import com.rodrigoapolo.gogarage.model.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.model.dto.UserLoginDTO
+import com.rodrigoapolo.gogarage.model.garage.Bairro
+import com.rodrigoapolo.gogarage.model.garage.Garage
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface Endpoint {
 
@@ -28,8 +30,8 @@ interface Endpoint {
         @Body user: User
     ) : Call<ResponseRegister>
 
-//    @GET("/garagens/get-bairro/")
-//    fun getGarage() {
-//
-//    }
+    @GET("/garagens/get-bairro/{bairro}")
+    fun getGarage(
+        @Path("bairro") bairro: String
+    ) : Call<List<Garage>>
 }
