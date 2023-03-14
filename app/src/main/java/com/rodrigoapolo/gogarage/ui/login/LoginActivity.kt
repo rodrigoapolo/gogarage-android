@@ -7,6 +7,7 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -74,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.buttonEnter.setOnClickListener {
+            hideSoftKeyBoard()
             viewModel.validEmail(binding.editEmail)
             viewModel.validPassword(binding.editPassword)
             viewModel.doLogin(binding.editEmail, binding.editPassword)
@@ -114,6 +116,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun formatNeighborhood(address: String): String {
         return address.substringAfter("- ").substringBefore(",")
+    }
+
+    private fun hideSoftKeyBoard() {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        if (imm.isAcceptingText) {
+            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
     }
 
 }
