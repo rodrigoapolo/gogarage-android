@@ -20,7 +20,14 @@ abstract class ValidateCompose {
                 return "Senha inválida"
             }
             return null
-
         }
+
+        fun valueNullOrEmpty(value: String): String?{
+            if (value.isNullOrEmpty()) {
+                return "Valor inválido"
+            }
+            return null
+        }
+
     }
 }

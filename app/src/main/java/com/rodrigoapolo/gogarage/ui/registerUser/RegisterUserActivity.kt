@@ -1,4 +1,4 @@
-package com.rodrigoapolo.gogarage.ui.register
+package com.rodrigoapolo.gogarage.ui.registerUser
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +8,11 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.R.*
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rodrigoapolo.gogarage.BuildConfig
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.api.Endpoint
-import com.rodrigoapolo.gogarage.databinding.ActivityRegisterBinding
+import com.rodrigoapolo.gogarage.databinding.ActivityRegisterUserBinding
 import com.rodrigoapolo.gogarage.model.ResponseRegister
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
@@ -24,13 +23,13 @@ import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
 import retrofit2.Call
 import retrofit2.Response
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterUserActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityRegisterUserBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityRegisterUserBinding.inflate(layoutInflater)
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
         createListenerData()
 
