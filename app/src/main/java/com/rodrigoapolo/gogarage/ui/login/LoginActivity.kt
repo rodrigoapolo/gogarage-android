@@ -17,7 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.databinding.ActivityLoginBinding
 import com.rodrigoapolo.gogarage.ui.home.HomeActivity
-import com.rodrigoapolo.gogarage.ui.register.RegisterActivity
+import com.rodrigoapolo.gogarage.ui.registerUser.RegisterUserActivity
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -82,7 +82,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.textRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, RegisterUserActivity::class.java)
+            intent.putExtra("id", viewModel.response().value)
             startActivity(intent)
         }
     }

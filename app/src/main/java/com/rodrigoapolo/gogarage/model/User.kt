@@ -6,17 +6,17 @@ data class User(
     @SerializedName("id")
     var id: Long?,
     @SerializedName("name")
-    var name: String,
+    var name: String?,
     @SerializedName("email")
-    var email: String,
+    var email: String?,
     @SerializedName("password")
-    var password: String,
+    var password: String?,
     @SerializedName("phone")
-    var phone: String,
+    var phone: String?,
     @SerializedName("status")
     var status: Boolean,
     @SerializedName("cpf")
-    var cpf: String,
+    var cpf: String?,
     @SerializedName("cnpj")
-    var cnpj: String,
-    )
+    var cnpj: String?,
+)

@@ -1,7 +1,10 @@
 package com.rodrigoapolo.gogarage.model.garage
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Address(
     @SerializedName("logradouro") var logradouro: String,
     @SerializedName("cep") var cep: String,
@@ -10,4 +13,4 @@ data class Address(
     @SerializedName("cidade") var cidade: String,
     @SerializedName("uf") var uf: String,
     @SerializedName("numero") var numero: String
-)
+): Parcelable

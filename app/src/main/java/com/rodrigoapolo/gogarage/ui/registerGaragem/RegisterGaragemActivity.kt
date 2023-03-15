@@ -9,6 +9,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterGaragemBinding
+import com.rodrigoapolo.gogarage.model.ResponseRegister
+import com.rodrigoapolo.gogarage.model.dto.GarageDTO
+import com.rodrigoapolo.gogarage.model.garage.Address
+import com.rodrigoapolo.gogarage.model.garage.Situacao
 import com.rodrigoapolo.gogarage.ui.RegisterAddressGarage.RegisterAddressGarageActivity
 
 class RegisterGaragemActivity : AppCompatActivity() {
@@ -118,7 +122,23 @@ class RegisterGaragemActivity : AppCompatActivity() {
         }
         viewModel.register().observe(this){
             if(it != null && it == true) {
+                val bundle: Bundle? = intent.extras
+                val id = bundle?.getLong("id")
+                val garage: GarageDTO = GarageDTO(0,
+                     binding.switchRoof.isChecked(),
+                    viewModel.timeStart().value.toString(),
+                    viewModel.timeEnd().value.toString(),
+                    binding.timeRateEditText.text.toString().toDouble(),
+                    binding.timeValueEditText.text.toString().toDouble(),
+                    binding.garageHeightEditText.text.toString().toDouble(),
+                    binding.garageWidthEditText.text.toString().toDouble(),
+                    "",
+                    "",
+                    Address("", "", "", "","", "", ""),
+                    id
+                )
                 val intent = Intent(this, RegisterAddressGarageActivity::class.java)
+                    intent.putExtra("garage", garage)
                 startActivity(intent)
             }
         }
