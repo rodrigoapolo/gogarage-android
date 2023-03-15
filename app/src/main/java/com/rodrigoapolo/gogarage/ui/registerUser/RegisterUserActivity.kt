@@ -78,6 +78,11 @@ class RegisterUserActivity : AppCompatActivity() {
         binding.buttonConfirm.setOnClickListener {
             validateData()
         }
+
+        binding.textLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun validatePassword() {
