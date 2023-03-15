@@ -19,7 +19,7 @@ class LoginViewModel : ViewModel(){
 
     private val _email = MutableLiveData<String>()
     private val _password = MutableLiveData<String>()
-    private val _response = MutableLiveData<String>()
+    private val _response = MutableLiveData<Long>()
 
     fun email(): LiveData<String> {
         return _email
@@ -29,7 +29,7 @@ class LoginViewModel : ViewModel(){
         return _password
     }
 
-    fun response(): LiveData<String>{
+    fun response(): LiveData<Long>{
         return _response
     }
 
@@ -61,7 +61,7 @@ class LoginViewModel : ViewModel(){
                     response: Response<LoginResponseDTO>
                 ) {
                     if (response.isSuccessful) {
-                        _response.value = response.body()?.id.toString()
+                        _response.value = response.body()?.id
 
                     } else {
                         _password.value = "Email ou Senha inválido"

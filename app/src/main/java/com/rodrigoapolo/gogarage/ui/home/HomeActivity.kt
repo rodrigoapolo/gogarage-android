@@ -12,7 +12,9 @@ import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
 import com.rodrigoapolo.gogarage.model.garage.Garage
 import com.rodrigoapolo.gogarage.repository.Repository
+import com.rodrigoapolo.gogarage.ui.RegisterAddressGarage.RegisterAddressGarageActivity
 import com.rodrigoapolo.gogarage.ui.home.recyclerview.ItemAdapter
+import com.rodrigoapolo.gogarage.ui.registerGaragem.RegisterGaragemActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -26,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val bundle: Bundle? = intent.extras
         val village = bundle?.getString("village")
+        val id = bundle?.getLong("id")
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
 
         listGarage = mutableListOf()
@@ -40,6 +43,12 @@ class HomeActivity : AppCompatActivity() {
 
         } else {
             Toast.makeText(this, "Não encontramos sua localização", Toast.LENGTH_LONG).show()
+        }
+
+        binding.buttonRegister.setOnClickListener {
+            val intent = Intent(this, RegisterGaragemActivity::class.java)
+            intent.putExtra("id",id)
+            startActivity(intent)
         }
 
         return setContentView(binding.root)

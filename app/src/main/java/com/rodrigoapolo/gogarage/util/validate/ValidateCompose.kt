@@ -28,6 +28,12 @@ abstract class ValidateCompose {
             }
             return null
         }
+        fun camposeNullOrEmpty(value: String, msg: String): String?{
+            if (value.isNullOrEmpty()) {
+                return msg
+            }
+            return null
+        }
 
     }
 }
