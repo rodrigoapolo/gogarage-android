@@ -41,12 +41,12 @@ class LoginViewModel : ViewModel(){
         _village.value = village
     }
 
-    fun validEmail(editEmail: TextInputEditText) {
-        _email.value = ValidateCompose.validEmailPatternsEmpty(editEmail)
+    fun validEmail(email: String, msg: String) {
+        _email.value = ValidateCompose.validEmailPatternsEmpty(email, msg)
     }
 
-    fun validPassword(editPassword: TextInputEditText) {
-        _password.value = ValidateCompose.validPasswordNullEmpty(editPassword)
+    fun validPassword(password: String, msg: String) {
+        _password.value = ValidateCompose.camposeNullOrEmpty(password, msg)
     }
 
     fun doLogin(email: TextInputEditText, password: TextInputEditText){
@@ -59,9 +59,7 @@ class LoginViewModel : ViewModel(){
                 password.text.toString()
             )
 
-            val callback = endpoint.authenticate(
-                userLoginDTO
-            )
+            val callback = endpoint.authenticate(userLoginDTO)
 
             callback.enqueue(object : Callback<LoginResponseDTO> {
                 override fun onResponse(

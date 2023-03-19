@@ -102,13 +102,13 @@ class LoginActivity : AppCompatActivity() {
     private fun createListenerData() {
         binding.editEmail.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                viewModel.validEmail(binding.editEmail)
+                viewModel.validEmail(binding.editEmail.text.toString(), "E-mail inválido")
             }
         }
 
         binding.editPassword.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                viewModel.validPassword(binding.editPassword)
+                viewModel.validPassword(binding.editPassword.text.toString(),"Senha inválida")
             }
         }
 
@@ -117,8 +117,8 @@ class LoginActivity : AppCompatActivity() {
                 requestGPSPremission()
             }else {
                 hideSoftKeyBoard()
-                viewModel.validEmail(binding.editEmail)
-                viewModel.validPassword(binding.editPassword)
+                viewModel.validEmail(binding.editEmail.text.toString(), "E-mail inválido")
+                viewModel.validPassword(binding.editPassword.text.toString(),"Senha inválida")
                 viewModel.doLogin(binding.editEmail, binding.editPassword)
             }
         }

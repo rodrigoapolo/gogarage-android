@@ -5,45 +5,29 @@ import com.google.android.material.textfield.TextInputEditText
 
 abstract class ValidateCompose {
 
-    companion object{
-        fun validEmailPatternsEmpty(edit: TextInputEditText): String? {
-            val emailText = edit.text.toString()
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches() || emailText.isEmpty()) {
-                return "E-mail inválido"
-            }
-            return null
-        }
-        fun validEmailPatternsEmpty(email: String,msg: String): String? {
-            val emailText = email
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches() || emailText.isEmpty()) {
-                return msg
-            }
-            return null
-        }
-
-        fun validPasswordNullEmpty(edit: TextInputEditText): String?{
-            if (edit.text.isNullOrEmpty()) {
-                return "Senha inválida"
-            }
-            return null
-        }
-
-        fun valueNullOrEmpty(value: String): String?{
+    companion object {
+        fun valueNullOrEmpty(value: String): String? {
             if (value.isNullOrEmpty()) {
                 return "Valor inválido"
             }
             return null
         }
-        fun camposeNullOrEmpty(value: String, msg: String): String?{
+
+        fun validEmailPatternsEmpty(email: String, msg: String): String? {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {
+                return msg
+            }
+            return null
+        }
+
+        fun camposeNullOrEmpty(value: String, msg: String): String? {
             if (value.isNullOrEmpty()) {
                 return msg
             }
             return null
         }
 
-        fun validConfirmPassword(password: String, passwordConfirm: String, msg: String): String?{
+        fun validConfirmPassword(password: String, passwordConfirm: String, msg: String): String? {
             if (password != passwordConfirm) {
                 return msg
             }
