@@ -14,6 +14,14 @@ abstract class ValidateCompose {
             }
             return null
         }
+        fun validEmailPatternsEmpty(email: String,msg: String): String? {
+            val emailText = email
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches() || emailText.isEmpty()) {
+                return msg
+            }
+            return null
+        }
 
         fun validPasswordNullEmpty(edit: TextInputEditText): String?{
             if (edit.text.isNullOrEmpty()) {
@@ -30,6 +38,13 @@ abstract class ValidateCompose {
         }
         fun camposeNullOrEmpty(value: String, msg: String): String?{
             if (value.isNullOrEmpty()) {
+                return msg
+            }
+            return null
+        }
+
+        fun validConfirmPassword(password: String, passwordConfirm: String, msg: String): String?{
+            if (password != passwordConfirm) {
                 return msg
             }
             return null

@@ -2,227 +2,133 @@ package com.rodrigoapolo.gogarage.ui.registerUser
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.util.Patterns
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.rodrigoapolo.gogarage.BuildConfig
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rodrigoapolo.gogarage.R
-import com.rodrigoapolo.gogarage.api.Endpoint
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterUserBinding
-import com.rodrigoapolo.gogarage.model.ResponseRegister
-import com.rodrigoapolo.gogarage.model.User
-import com.rodrigoapolo.gogarage.model.UserEmail
 import com.rodrigoapolo.gogarage.ui.login.LoginActivity
-import retrofit2.Callback
-import com.rodrigoapolo.gogarage.util.NetworkUtils
-import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
-import retrofit2.Call
-import retrofit2.Response
 
 class RegisterUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterUserBinding
+    private lateinit var viewModel: RegisterUserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterUserBinding.inflate(layoutInflater)
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
-        createListenerData()
+        viewModel = ViewModelProvider(this)[RegisterUserViewModel::class.java]
 
-        binding
+        createListenerData()
+        setObserver()
 
         return setContentView(binding.root)
+    }
+
+    private fun setObserver() {
+        viewModel.email().observe(this) {
+            binding.emailContainer.helperText = it
+        }
+        viewModel.password().observe(this) {
+            binding.passwordContainer.helperText = it
+        }
+        viewModel.passwordConfirm().observe(this) {
+            binding.passwordConfirmContainer.helperText = it
+        }
+        viewModel.name().observe(this) {
+            binding.nameContainer.helperText = it
+        }
+        viewModel.cpf().observe(this) {
+            binding.cpfContainer.helperText = it
+        }
+        viewModel.phone().observe(this) {
+            binding.phoneContainer.helperText = it
+        }
+        viewModel.response().observe(this) {
+            if (it) {
+                createDialog()
+            }
+        }
     }
 
     private fun createListenerData() {
         binding.emailEditText.setOnFocusChangeListener { _, focused ->
             if (!focused) {
-                validEmail()
-            }
-        }
-
-        binding.passwordConfirmEditText.setOnFocusChangeListener { _, focused ->
-            if (!focused) {
-                validConfirmPassword()
+                viewModel.validEmail(binding.emailEditText.text.toString(), "E-mail inválido")
             }
         }
 
         binding.passwordEditText.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                validatePassword()
+                viewModel.validatePassword(
+                    binding.passwordEditText.text.toString(),
+                    "Senha inválida"
+                )
+            }
+        }
+
+        binding.passwordConfirmEditText.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                viewModel.validatePassword(
+                    binding.passwordEditText.text.toString(),
+                    "Senha inválida"
+                )
+                viewModel.validConfirmPassword(
+                    binding.passwordEditText.text.toString(),
+                    binding.passwordConfirmEditText.text.toString(),
+                    "Senha inválida",
+                    "Senha diferente"
+                )
             }
         }
 
         binding.nameEditText.setOnFocusChangeListener { _, focused ->
             if (!focused) {
-                validateName()
+                viewModel.validateName(binding.nameEditText.text.toString(), "Nome inválido")
             }
         }
 
         binding.cpfEditText.setOnFocusChangeListener { _, focused ->
             if (!focused) {
-                validateCPF()
+                viewModel.validateCPF(binding.cpfEditText.text.toString(), "CPF inválido")
             }
         }
 
         binding.phoneEditText.setOnFocusChangeListener { _, focused ->
             if (!focused) {
-                validatePhone()
+                viewModel.validatePhone(binding.phoneEditText.text.toString(), "Telefone inválido")
             }
         }
 
         binding.buttonConfirm.setOnClickListener {
-            validateData()
+            viewModel.validEmail(binding.emailEditText.text.toString(), "E-mail inválido")
+            viewModel.validatePassword(binding.passwordEditText.text.toString(), "Senha inválida")
+            viewModel.validatePassword(binding.passwordEditText.text.toString(), "Senha inválida")
+            viewModel.validConfirmPassword(
+                binding.passwordEditText.text.toString(),
+                binding.passwordConfirmEditText.text.toString(),
+                "Senha inválida",
+                "Senha diferente"
+            )
+            viewModel.validateName(binding.nameEditText.text.toString(), "Nome inválido")
+            viewModel.validateCPF(binding.cpfEditText.text.toString(), "CPF inválido")
+            viewModel.validatePhone(binding.phoneEditText.text.toString(), "Telefone inválido")
+            viewModel.validateData(
+                binding.nameEditText.text.toString(),
+                binding.emailEditText.text.toString(),
+                binding.passwordEditText.text.toString(),
+                binding.phoneEditText.text.toString(),
+                binding.cpfEditText.text.toString(),
+            )
         }
 
         binding.textLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun validatePassword() {
-        if (binding.passwordEditText.text.isNullOrEmpty()) {
-            binding.passwordContainer.helperText = "Senha inválida"
-        } else {
-            binding.passwordContainer.helperText = null
-        }
-    }
-
-    private fun validateName() {
-        if (binding.nameEditText.text.isNullOrEmpty()) {
-            binding.nameContainer.helperText = "Nome inválido"
-        } else {
-            binding.nameContainer.helperText = null
-        }
-    }
-
-    private fun validateCPF() {
-        if (binding.cpfEditText.text.isNullOrEmpty()) {
-            binding.cpfContainer.helperText = "CPF inválido"
-        } else if (!ValidateCPF.isCPF(binding.cpfEditText.text.toString())) {
-            binding.cpfContainer.helperText = "CPF inválido"
-        } else {
-            binding.cpfContainer.helperText = null
-        }
-    }
-
-    private fun validatePhone() {
-        if (binding.cpfEditText.text.isNullOrEmpty()) {
-            binding.phoneContainer.helperText = "Telefone inválido"
-        } else {
-            binding.phoneContainer.helperText = null
-        }
-    }
-
-    private fun validEmail() {
-        val emailText = binding.emailEditText.text.toString()
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()
-            || emailText.isEmpty()
-        ) {
-            binding.emailContainer.helperText = "E-mail inválido"
-        } else {
-            validateEmailRequest(emailText)
-        }
-    }
-
-    private fun validConfirmPassword() {
-        if (!binding.passwordEditText.text.isNullOrEmpty()) {
-            if (binding.passwordEditText.text.toString() !=
-                binding.passwordConfirmEditText.text.toString()
-            ) {
-                binding.passwordConfirmContainer.helperText = "Senha diferente"
-            } else {
-                binding.passwordConfirmContainer.helperText = null
-            }
-        }
-    }
-
-    private fun validateData() {
-
-        validEmail()
-        validatePassword()
-        validateName()
-        validateCPF()
-        validatePhone()
-
-        if (binding.emailContainer.helperText == null &&
-            binding.passwordContainer.helperText == null &&
-            binding.passwordConfirmContainer.helperText == null &&
-            binding.nameContainer.helperText == null &&
-            binding.cpfContainer.helperText == null &&
-            binding.phoneContainer.helperText == null
-        ) {
-            register(
-                User(
-                    null,
-                    binding.nameEditText.text.toString(),
-                    binding.emailEditText.text.toString(),
-                    binding.passwordEditText.text.toString(),
-                    binding.phoneEditText.text.toString(),
-                    true,
-                    binding.cpfEditText.text.toString(),
-                    "",
-                )
-            )
-            createDialog()
-            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "bad", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun validateEmailRequest(email: String) {
-        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val userEmail = UserEmail(email)
-
-        val callback = endpoint.validateEmail(
-            userEmail
-        )
-
-        callback.enqueue(object : Callback<UserEmail> {
-            override fun onResponse(call: Call<UserEmail>, response: Response<UserEmail>) {
-                if (response.isSuccessful) {
-                    if (response.body()?.email == email) {
-                        binding.emailContainer.helperText = "E-mail já cadastrado"
-                    }
-                } else {
-                    binding.emailContainer.helperText = null
-                }
-            }
-
-            override fun onFailure(call: Call<UserEmail>, t: Throwable) {
-                Log.i("validateEmail", t.toString())
-            }
-
-        })
-    }
-
-    private fun register(user: User) {
-        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-
-        val callback = endpoint.register(user)
-
-        callback.enqueue(object : Callback<ResponseRegister> {
-            override fun onResponse(
-                call: Call<ResponseRegister>,
-                response: Response<ResponseRegister>
-            ) {
-                Log.i("register", response.body().toString())
-            }
-
-            override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
-                Log.i("register", t.toString())
-            }
-
-        })
     }
 
     private fun createDialog() {
@@ -233,7 +139,6 @@ class RegisterUserActivity : AppCompatActivity() {
         view.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
             successRegister()
         }
-
         dialog.show()
     }
 

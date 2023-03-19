@@ -20,7 +20,11 @@ class LoginViewModel : ViewModel(){
     private val _email = MutableLiveData<String>()
     private val _password = MutableLiveData<String>()
     private val _response = MutableLiveData<Long>()
+    private val _village = MutableLiveData<String>()
 
+    fun village(): LiveData<String> {
+        return _village
+    }
     fun email(): LiveData<String> {
         return _email
     }
@@ -31,6 +35,10 @@ class LoginViewModel : ViewModel(){
 
     fun response(): LiveData<Long>{
         return _response
+    }
+
+    fun setVillage(village: String) {
+        _village.value = village
     }
 
     fun validEmail(editEmail: TextInputEditText) {
@@ -65,7 +73,6 @@ class LoginViewModel : ViewModel(){
 
                     } else {
                         _password.value = "Email ou Senha inválido"
-                        Log.i("requestAPI", response.toString() + "error")
                     }
                 }
 

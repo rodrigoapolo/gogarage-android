@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,19 +27,55 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var viewModel: LoginViewModel
-    private lateinit var village: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        if (!isGPSPremissionGranted()) {
+            requestGPSPremission()
+        }
+
         createListenerData()
         setObserver()
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         return setContentView(binding.root)
+    }
+
+    private fun requestGPSPremission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),
+            GPS_PERMISSION_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == GPS_PERMISSION_CODE){
+            if(grantResults.firstOrNull() != PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this,"Por favor aceite a permissão de localização.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun isGPSPremissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun setObserver() {
@@ -55,9 +92,10 @@ class LoginActivity : AppCompatActivity() {
             binding.progressBar2.visibility = View.VISIBLE
             Timer().schedule(timerTask {
                 val intent = Intent(applicationContext, HomeActivity::class.java)
-                intent.putExtra("village", village)
+                intent.putExtra("village", viewModel.village().value)
+                intent.putExtra("id", viewModel.response().value)
                 startActivity(intent)
-            }, 3000)
+            }, 5000)
         }
     }
 
@@ -75,15 +113,18 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.buttonEnter.setOnClickListener {
-            hideSoftKeyBoard()
-            viewModel.validEmail(binding.editEmail)
-            viewModel.validPassword(binding.editPassword)
-            viewModel.doLogin(binding.editEmail, binding.editPassword)
+            if (!isGPSPremissionGranted()) {
+                requestGPSPremission()
+            }else {
+                hideSoftKeyBoard()
+                viewModel.validEmail(binding.editEmail)
+                viewModel.validPassword(binding.editPassword)
+                viewModel.doLogin(binding.editEmail, binding.editPassword)
+            }
         }
 
         binding.textRegister.setOnClickListener {
             val intent = Intent(this, RegisterUserActivity::class.java)
-            intent.putExtra("id", viewModel.response().value)
             startActivity(intent)
         }
     }
@@ -101,7 +142,7 @@ class LoginActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                101
+                GPS_PERMISSION_CODE
             )
             return
         }
@@ -109,8 +150,8 @@ class LoginActivity : AppCompatActivity() {
             if (it != null) {
                 val geocoder = Geocoder(this, Locale.getDefault())
                 val addressesList = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                village = formatNeighborhood(addressesList.toString())
-                Log.i("village", village)
+                viewModel.setVillage(formatNeighborhood(addressesList.toString()))
+                Log.i("village", viewModel.village().value.toString())
             }
         }
     }
@@ -124,6 +165,10 @@ class LoginActivity : AppCompatActivity() {
         if (imm.isAcceptingText) {
             imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
         }
+    }
+
+    companion object{
+        private const val GPS_PERMISSION_CODE = 201
     }
 
 }
