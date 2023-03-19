@@ -93,15 +93,15 @@ class RegisterUserViewModel : ViewModel() {
         _password.value = ValidateCompose.camposeNullOrEmpty(password, msg)
     }
 
-    fun validEmail(email: String, msg: String) {
+    fun validEmail(email: String, msg: String, msgValidateRequest: String) {
 
         _email.value = ValidateCompose.validEmailPatternsEmpty(email, msg)
         if (_email.value == null) {
-            validateEmailRequest(email)
+            validateEmailRequest(email, msgValidateRequest)
         }
     }
 
-    private fun validateEmailRequest(email: String) {
+    private fun validateEmailRequest(email: String, msgValidateRequest: String) {
         val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val userEmail = UserEmail(email)
@@ -114,7 +114,7 @@ class RegisterUserViewModel : ViewModel() {
             override fun onResponse(call: Call<UserEmail>, response: Response<UserEmail>) {
                 if (response.isSuccessful) {
                     if (response.body()?.email == email) {
-                        _email.value = "E-mail já cadastrado"
+                        _email.value = msgValidateRequest
                         Log.i("validateEmail", response.body().toString())
                     }
                 } else {

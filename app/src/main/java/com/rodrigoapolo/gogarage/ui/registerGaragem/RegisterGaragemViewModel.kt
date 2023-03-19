@@ -48,20 +48,20 @@ class RegisterGaragemViewModel : ViewModel() {
             return _width
         }
 
-        fun validateWidth(value: String) {
-            _width.value = ValidateCompose.valueNullOrEmpty(value)
+        fun validateWidth(value: String, msg: String) {
+            _width.value = ValidateCompose.camposeNullOrEmpty(value, msg)
         }
 
-        fun validateHeight(value: String) {
-            _height.value = ValidateCompose.valueNullOrEmpty(value)
+        fun validateHeight(value: String, msg: String) {
+            _height.value = ValidateCompose.camposeNullOrEmpty(value, msg)
         }
 
-        fun validateTimeRate(value: String) {
-            _timeRate.value = ValidateCompose.valueNullOrEmpty(value)
+        fun validateTimeRate(value: String, msg: String) {
+            _timeRate.value = ValidateCompose.camposeNullOrEmpty(value, msg)
         }
 
-        fun validateTimeValue(value: String) {
-            _timeValue.value = ValidateCompose.valueNullOrEmpty(value)
+        fun validateTimeValue(value: String, msg: String) {
+            _timeValue.value = ValidateCompose.camposeNullOrEmpty(value, msg)
         }
 
         fun formataTimeStart(hour: Int, minute: Int) {

@@ -6,14 +6,7 @@ import com.google.android.material.textfield.TextInputEditText
 abstract class ValidateCompose {
 
     companion object {
-        fun valueNullOrEmpty(value: String): String? {
-            if (value.isNullOrEmpty()) {
-                return "Valor inválido"
-            }
-            return null
-        }
-
-        fun validEmailPatternsEmpty(email: String, msg: String): String? {
+         fun validEmailPatternsEmpty(email: String, msg: String): String? {
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {
                 return msg
             }

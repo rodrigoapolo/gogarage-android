@@ -70,33 +70,33 @@ class RegisterGaragemActivity : AppCompatActivity() {
 
         binding.timeValueEditText.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus){
-                viewModel.validateTimeValue(binding.timeValueEditText.text.toString())
+                viewModel.validateTimeValue(binding.timeValueEditText.text.toString(),"Valor inválido")
             }
         }
 
         binding.timeRateEditText.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus){
-                viewModel.validateTimeRate(binding.timeRateEditText.text.toString())
+                viewModel.validateTimeRate(binding.timeRateEditText.text.toString(),"Valor inválido")
             }
         }
 
         binding.garageHeightEditText.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus){
-                viewModel.validateHeight(binding.garageHeightEditText.text.toString())
+                viewModel.validateHeight(binding.garageHeightEditText.text.toString(),"Valor inválido")
             }
         }
 
         binding.garageWidthEditText.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus){
-                viewModel.validateWidth(binding.garageWidthEditText.text.toString())
+                viewModel.validateWidth(binding.garageWidthEditText.text.toString(),"Valor inválido")
             }
         }
 
         binding.buttonContinue.setOnClickListener {
-            viewModel.validateTimeValue(binding.timeValueEditText.text.toString())
-            viewModel.validateTimeRate(binding.timeRateEditText.text.toString())
-            viewModel.validateHeight(binding.garageHeightEditText.text.toString())
-            viewModel.validateWidth(binding.garageWidthEditText.text.toString())
+            viewModel.validateTimeValue(binding.timeValueEditText.text.toString(),"Valor inválido")
+            viewModel.validateTimeRate(binding.timeRateEditText.text.toString(),"Valor inválido")
+            viewModel.validateHeight(binding.garageHeightEditText.text.toString(),"Valor inválido")
+            viewModel.validateWidth(binding.garageWidthEditText.text.toString(),"Valor inválido")
             viewModel.doContinue()
         }
     }

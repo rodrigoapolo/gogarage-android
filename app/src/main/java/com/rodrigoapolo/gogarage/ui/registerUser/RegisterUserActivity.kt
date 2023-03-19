@@ -57,7 +57,7 @@ class RegisterUserActivity : AppCompatActivity() {
     private fun createListenerData() {
         binding.emailEditText.setOnFocusChangeListener { _, focused ->
             if (!focused) {
-                viewModel.validEmail(binding.emailEditText.text.toString(), "E-mail inválido")
+                viewModel.validEmail(binding.emailEditText.text.toString(), "E-mail inválido", "E-mail já cadastrado")
             }
         }
 
@@ -104,7 +104,7 @@ class RegisterUserActivity : AppCompatActivity() {
         }
 
         binding.buttonConfirm.setOnClickListener {
-            viewModel.validEmail(binding.emailEditText.text.toString(), "E-mail inválido")
+            viewModel.validEmail(binding.emailEditText.text.toString(), "E-mail inválido","E-mail já cadastrado")
             viewModel.validatePassword(binding.passwordEditText.text.toString(), "Senha inválida")
             viewModel.validatePassword(binding.passwordEditText.text.toString(), "Senha inválida")
             viewModel.validConfirmPassword(

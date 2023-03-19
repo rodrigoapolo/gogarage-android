@@ -49,7 +49,7 @@ class LoginViewModel : ViewModel(){
         _password.value = ValidateCompose.camposeNullOrEmpty(password, msg)
     }
 
-    fun doLogin(email: TextInputEditText, password: TextInputEditText){
+    fun doLogin(email: TextInputEditText, password: TextInputEditText, msg: String){
         if (_email.value == null && _password.value == null) {
             val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
             val endpoint = retrofitClient.create(Endpoint::class.java)
@@ -70,7 +70,7 @@ class LoginViewModel : ViewModel(){
                         _response.value = response.body()?.id
 
                     } else {
-                        _password.value = "Email ou Senha inválido"
+                        _password.value = msg
                     }
                 }
 
