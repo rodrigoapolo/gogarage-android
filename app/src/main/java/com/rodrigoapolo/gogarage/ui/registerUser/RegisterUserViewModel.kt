@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rodrigoapolo.gogarage.BuildConfig
-import com.rodrigoapolo.gogarage.api.Endpoint
+import com.rodrigoapolo.gogarage.retrofit.service.Endpoint
 import com.rodrigoapolo.gogarage.model.ResponseRegister
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
-import com.rodrigoapolo.gogarage.util.NetworkUtils
+import com.rodrigoapolo.gogarage.retrofit.retrofit.RetrofitClient
 import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
 import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
 import retrofit2.Call
@@ -102,7 +102,7 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     private fun validateEmailRequest(email: String, msgValidateRequest: String) {
-        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
+        val retrofitClient = RetrofitClient.getRetrofitInstance(BuildConfig.PATH)
         val endpoint = retrofitClient.create(Endpoint::class.java)
         val userEmail = UserEmail(email)
 
@@ -141,7 +141,7 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     private fun register(user: User) {
-        val retrofitClient = NetworkUtils.getRetrofitInstance(BuildConfig.PATH)
+        val retrofitClient = RetrofitClient.getRetrofitInstance(BuildConfig.PATH)
         val endpoint = retrofitClient.create(Endpoint::class.java)
 
         val callback = endpoint.register(user)

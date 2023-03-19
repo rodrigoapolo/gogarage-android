@@ -1,11 +1,10 @@
-package com.rodrigoapolo.gogarage.api
+package com.rodrigoapolo.gogarage.retrofit.service
 
 import com.rodrigoapolo.gogarage.model.ResponseRegister
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
 import com.rodrigoapolo.gogarage.model.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.model.dto.UserLoginDTO
-import com.rodrigoapolo.gogarage.model.garage.Bairro
 import com.rodrigoapolo.gogarage.model.garage.Garage
 import retrofit2.Call
 import retrofit2.Response

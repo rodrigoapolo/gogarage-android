@@ -1,7 +1,7 @@
 package com.rodrigoapolo.gogarage.util
 
 import com.rodrigoapolo.gogarage.BuildConfig
-import com.rodrigoapolo.gogarage.api.Endpoint
+import com.rodrigoapolo.gogarage.retrofit.service.Endpoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

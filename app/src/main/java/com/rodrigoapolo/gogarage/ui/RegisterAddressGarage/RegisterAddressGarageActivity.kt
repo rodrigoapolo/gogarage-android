@@ -82,11 +82,17 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
         viewModel.street().observe(this) {
             binding.streetContainer.helperText = it
         }
+        viewModel.streetText().observe(this) {
+            binding.streetEditText.setText(it)
+        }
         viewModel.neighborhood().observe(this) {
             binding.neighborhoodContainer.helperText = it
         }
-        viewModel.city().observe(this) {
-            binding.cityContainer.helperText = it
+        viewModel.neighborhoodText().observe(this) {
+            binding.neighborhoodEditText.setText(it)
+        }
+        viewModel.cityText().observe(this) {
+            binding.cityEditText.setText(it)
         }
         viewModel.register().observe(this) {
             if (it) {
