@@ -119,7 +119,7 @@ class LoginActivity : AppCompatActivity() {
                 hideSoftKeyBoard()
                 viewModel.validEmail(binding.editEmail.text.toString(), "E-mail inválido")
                 viewModel.validPassword(binding.editPassword.text.toString(),"Senha inválida")
-                viewModel.doLogin(binding.editEmail, binding.editPassword, "Email ou Senha inválido")
+                viewModel.doLogin(binding.editEmail.text.toString(), binding.editPassword.text.toString(), "Email ou Senha inválido")
             }
         }
 

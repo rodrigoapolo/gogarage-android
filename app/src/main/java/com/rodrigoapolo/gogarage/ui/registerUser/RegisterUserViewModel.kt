@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rodrigoapolo.gogarage.BuildConfig
-import com.rodrigoapolo.gogarage.retrofit.service.Endpoint
+import com.rodrigoapolo.gogarage.retrofit.service.UserService
 import com.rodrigoapolo.gogarage.model.ResponseRegister
 import com.rodrigoapolo.gogarage.model.User
 import com.rodrigoapolo.gogarage.model.UserEmail
+import com.rodrigoapolo.gogarage.retrofit.model.EmailModel
 import com.rodrigoapolo.gogarage.retrofit.retrofit.RetrofitClient
+import com.rodrigoapolo.gogarage.retrofit.service.EmailService
 import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
 import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
 import retrofit2.Call
@@ -25,8 +27,6 @@ class RegisterUserViewModel : ViewModel() {
     private var _cpf = MutableLiveData<String?>()
     private var _phone = MutableLiveData<String>()
     private var _response = MutableLiveData<Boolean>()
-
-    //var email: MutableLiveData<String?> = _email
 
     fun email(): LiveData<String?> {
         return _email
@@ -102,29 +102,23 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     private fun validateEmailRequest(email: String, msgValidateRequest: String) {
-        val retrofitClient = RetrofitClient.getRetrofitInstance(BuildConfig.PATH)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val userEmail = UserEmail(email)
+        val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
 
-        val callback = endpoint.validateEmail(
-            userEmail
-        )
+        val callback = service.validateEmail(UserEmail(email))
 
         callback.enqueue(object : Callback<UserEmail> {
             override fun onResponse(call: Call<UserEmail>, response: Response<UserEmail>) {
                 if (response.isSuccessful) {
-                    if (response.body()?.email == email) {
                         _email.value = msgValidateRequest
-                        Log.i("validateEmail", response.body().toString())
-                    }
+                        Log.i("requestAPI", response.body().toString()+ " validate email")
                 } else {
                     _email.value = null
-                    Log.i("validateEmail", response.body().toString())
+                    Log.i("requestAPI", response.body().toString() + " error validate email")
                 }
             }
 
             override fun onFailure(call: Call<UserEmail>, t: Throwable) {
-                Log.i("validateEmail", t.toString())
+                Log.i("requestAPI", t.toString() + " error validate email")
             }
 
         })
@@ -141,23 +135,62 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     private fun register(user: User) {
-        val retrofitClient = RetrofitClient.getRetrofitInstance(BuildConfig.PATH)
-        val endpoint = retrofitClient.create(Endpoint::class.java)
+        val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
 
-        val callback = endpoint.register(user)
-
+        val callback = service.register(user)
         callback.enqueue(object : Callback<ResponseRegister> {
             override fun onResponse(
                 call: Call<ResponseRegister>,
                 response: Response<ResponseRegister>
             ) {
                 _response.value = true
-                Log.i("register", response.body().toString())
+                sendingEmail(response.body()?.id, user.email, user.name)
+                Log.i("requestAPI", response.body().toString() + " user")
             }
 
             override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
                 _response.value = false
-                Log.i("register", t.toString())
+                Log.i("requestAPI", t.toString() + " error register user")
+
+            }
+
+        })
+    }
+
+    fun sendingEmail(id: Long?, email: String?, name: String?) {
+        val service = RetrofitClient.createService(BuildConfig.PATH, EmailService::class.java)
+        val callback = service.sendingEmail(EmailModel(
+            id,
+            "gogaragedev@gmail.com",
+            email,
+            "Bem-vindo(a) ao GoGarage - Seu novo aplicativo de garagens próximas",
+            "Prezado(a) $name,\n" +
+                    "\n" +
+                    "Em nome de toda a equipe do GoGarage, gostaríamos de lhe dar as boas-vindas ao nosso aplicativo! É um prazer tê-lo(a) conosco como um(a) dos nossos(as) novos(as) usuários(as).\n" +
+                    "\n" +
+                    "O GoGarage é um aplicativo que visa facilitar a sua vida quando o assunto é encontrar uma garagem próxima de você. Com apenas alguns cliques, você poderá localizar a garagem mais próxima, verificar suas avaliações e preços, e agendar o seu serviço de forma fácil e rápida.\n" +
+                    "\n" +
+                    "Além disso, o GoGarage conta com uma ampla rede de garagens parceiras, que oferecem serviços de alta qualidade e excelência. Com isso, você pode ter certeza de que estará colocando o seu carro nas mãos de profissionais altamente capacitados e confiáveis.\n" +
+                    "\n" +
+                    "Para começar a utilizar o aplicativo, basta fazer o download em seu smartphone, criar a sua conta e começar a navegar. Não se preocupe, o processo de cadastro é simples e rápido, e em poucos minutos você estará pronto(a) para utilizar o GoGarage.\n" +
+                    "\n" +
+                    "Fique à vontade para explorar todas as funcionalidades do nosso aplicativo e, se precisar de ajuda, nossa equipe de suporte estará à disposição para ajudá-lo(a) em tudo o que precisar.\n" +
+                    "\n" +
+                    "Mais uma vez, seja bem-vindo(a) ao GoGarage. Estamos felizes por tê-lo(a) conosco e esperamos que aproveite ao máximo a nossa plataforma!\n" +
+                    "\n" +
+                    "Atenciosamente,\n" +
+                    "Equipe GoGarage"
+        ))
+
+        callback.enqueue(object : Callback<EmailModel>{
+            override fun onResponse(call: Call<EmailModel>, response: Response<EmailModel>) {
+                Log.i("requestAPI", response.body()?.emailFrom + " respota email")
+
+            }
+
+            override fun onFailure(call: Call<EmailModel>, t: Throwable) {
+                Log.i("requestAPI", t.toString() + " error email")
+
             }
 
         })

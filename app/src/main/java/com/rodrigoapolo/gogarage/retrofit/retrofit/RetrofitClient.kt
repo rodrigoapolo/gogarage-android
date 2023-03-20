@@ -19,7 +19,7 @@ class RetrofitClient {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-            Log.i("requestAPI", INSTANCE.baseUrl().toString() + "error")
+            Log.i("requestAPI", INSTANCE.baseUrl().toString() + " rota do retrofit")
 
             return INSTANCE
         }

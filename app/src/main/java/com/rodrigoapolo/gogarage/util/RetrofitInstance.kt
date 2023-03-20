@@ -1,7 +1,7 @@
 package com.rodrigoapolo.gogarage.util
 
 import com.rodrigoapolo.gogarage.BuildConfig
-import com.rodrigoapolo.gogarage.retrofit.service.Endpoint
+import com.rodrigoapolo.gogarage.retrofit.service.UserService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,8 +17,8 @@ object RetrofitInstance {
             .build()
     }
 
-    val api: Endpoint by lazy {
-        retrofit.create(Endpoint::class.java)
+    val api: UserService by lazy {
+        retrofit.create(UserService::class.java)
     }
 
 }

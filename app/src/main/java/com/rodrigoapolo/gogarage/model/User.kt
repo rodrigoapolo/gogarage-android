@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
     @SerializedName("id")
-    var id: Long?,
+    var id: Long? = 0,
     @SerializedName("name")
     var name: String?,
     @SerializedName("email")

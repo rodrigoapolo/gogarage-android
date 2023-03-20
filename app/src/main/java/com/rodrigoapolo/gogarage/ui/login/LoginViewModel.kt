@@ -4,9 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.material.textfield.TextInputEditText
 import com.rodrigoapolo.gogarage.BuildConfig
-import com.rodrigoapolo.gogarage.retrofit.service.Endpoint
+import com.rodrigoapolo.gogarage.retrofit.service.UserService
 import com.rodrigoapolo.gogarage.model.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.model.dto.UserLoginDTO
 import com.rodrigoapolo.gogarage.retrofit.retrofit.RetrofitClient
@@ -50,13 +49,11 @@ class LoginViewModel : ViewModel() {
         _password.value = ValidateCompose.camposeNullOrEmpty(password, msg)
     }
 
-    fun doLogin(email: TextInputEditText, password: TextInputEditText, msg: String) {
+    fun doLogin(email: String, password: String, msg: String) {
         if (_email.value == null && _password.value == null) {
-            val service = RetrofitClient.createService(BuildConfig.PATH, Endpoint::class.java)
+            val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
 
-            val callback = service.authenticate(
-                UserLoginDTO(email.text.toString(), password.text.toString())
-            )
+            val callback = service.authenticate(UserLoginDTO(email, password))
 
             callback.enqueue(object : Callback<LoginResponseDTO> {
                 override fun onResponse(
@@ -72,7 +69,7 @@ class LoginViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<LoginResponseDTO>, t: Throwable) {
-                    Log.i("requestAPI", t.toString() + "error")
+                    Log.i("requestAPI", t.toString() + " error login")
                 }
             })
         }
