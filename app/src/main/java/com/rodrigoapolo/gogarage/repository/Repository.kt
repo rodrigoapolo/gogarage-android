@@ -1,18 +1,12 @@
 package com.rodrigoapolo.gogarage.repository
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Geocoder
-import androidx.core.app.ActivityCompat
-import com.rodrigoapolo.gogarage.model.garage.Garage
-import com.rodrigoapolo.gogarage.util.RetrofitInstance
+import com.rodrigoapolo.gogarage.model.GarageModel
+import com.rodrigoapolo.gogarage.retrofit.RetrofitInstance
 import retrofit2.Response
-import java.util.*
 
 class Repository {
 
-    suspend fun getGarage(village: String): Response<List<Garage>> {
+    suspend fun getGarage(village: String): Response<List<GarageModel>> {
         return RetrofitInstance.api.getGarage(village)
     }
 
