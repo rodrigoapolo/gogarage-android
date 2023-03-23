@@ -13,6 +13,7 @@ import com.rodrigoapolo.gogarage.ViewModel.RegisterGaragemViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterGaragemBinding
 import com.rodrigoapolo.gogarage.dto.GarageDTO
 import com.rodrigoapolo.gogarage.model.AddressModel
+import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
 class RegisterGaragemActivity : AppCompatActivity() {
 
@@ -68,34 +69,46 @@ class RegisterGaragemActivity : AppCompatActivity() {
         }
 
         binding.timeValueEditText.setOnFocusChangeListener { v, hasFocus ->
-            if(!hasFocus){
-                viewModel.validateTimeValue(binding.timeValueEditText.text.toString(),"Valor inválido")
+            if (!hasFocus) {
+                viewModel.validateTimeValue(
+                    binding.timeValueEditText.text.toString(),
+                    "Valor inválido"
+                )
             }
         }
 
         binding.timeRateEditText.setOnFocusChangeListener { v, hasFocus ->
-            if(!hasFocus){
-                viewModel.validateTimeRate(binding.timeRateEditText.text.toString(),"Valor inválido")
+            if (!hasFocus) {
+                viewModel.validateTimeRate(
+                    binding.timeRateEditText.text.toString(),
+                    "Valor inválido"
+                )
             }
         }
 
         binding.garageHeightEditText.setOnFocusChangeListener { v, hasFocus ->
-            if(!hasFocus){
-                viewModel.validateHeight(binding.garageHeightEditText.text.toString(),"Valor inválido")
+            if (!hasFocus) {
+                viewModel.validateHeight(
+                    binding.garageHeightEditText.text.toString(),
+                    "Valor inválido"
+                )
             }
         }
 
         binding.garageWidthEditText.setOnFocusChangeListener { v, hasFocus ->
-            if(!hasFocus){
-                viewModel.validateWidth(binding.garageWidthEditText.text.toString(),"Valor inválido")
+            if (!hasFocus) {
+                viewModel.validateWidth(
+                    binding.garageWidthEditText.text.toString(),
+                    "Valor inválido"
+                )
             }
         }
 
         binding.buttonContinue.setOnClickListener {
-            viewModel.validateTimeValue(binding.timeValueEditText.text.toString(),"Valor inválido")
-            viewModel.validateTimeRate(binding.timeRateEditText.text.toString(),"Valor inválido")
-            viewModel.validateHeight(binding.garageHeightEditText.text.toString(),"Valor inválido")
-            viewModel.validateWidth(binding.garageWidthEditText.text.toString(),"Valor inválido")
+            viewModel.validateTimeValue(binding.timeValueEditText.text.toString(), "Valor inválido")
+            viewModel.validateTimeRate(binding.timeRateEditText.text.toString(), "Valor inválido")
+            viewModel.validateHeight(binding.garageHeightEditText.text.toString(), "Valor inválido")
+            viewModel.validateWidth(binding.garageWidthEditText.text.toString(), "Valor inválido")
             viewModel.doContinue()
         }
     }
@@ -107,24 +120,24 @@ class RegisterGaragemActivity : AppCompatActivity() {
         viewModel.timeEnd().observe(this) {
             binding.timeEnd.text = "Termino: $it"
         }
-        viewModel.timeValue().observe(this){
+        viewModel.timeValue().observe(this) {
             binding.timeValueContainer.helperText = it
         }
-        viewModel.timeRate().observe(this){
+        viewModel.timeRate().observe(this) {
             binding.timeRateContainer.helperText = it
         }
-        viewModel.height().observe(this){
+        viewModel.height().observe(this) {
             binding.garageHeightContainer.helperText = it
         }
-        viewModel.width().observe(this){
+        viewModel.width().observe(this) {
             binding.garageWidthContainer.helperText = it
         }
-        viewModel.register().observe(this){
-            if(it != null && it == true) {
-                val bundle: Bundle? = intent.extras
-                val id = bundle!!.getLong("id")
-                val garage: GarageDTO = GarageDTO(0,
-                     binding.switchRoof.isChecked,
+        viewModel.register().observe(this) {
+            if (it != null && it == true) {
+                val id = SecurityPreferences(applicationContext).getStoredInt("id").toLong()
+                val garage: GarageDTO = GarageDTO(
+                    0,
+                    binding.switchRoof.isChecked,
                     viewModel.timeStart().value.toString(),
                     viewModel.timeEnd().value.toString(),
                     binding.timeRateEditText.text.toString().toDouble(),
@@ -133,7 +146,7 @@ class RegisterGaragemActivity : AppCompatActivity() {
                     binding.garageWidthEditText.text.toString().toDouble(),
                     "",
                     "",
-                    AddressModel("", "", "", "","", "", ""),
+                    AddressModel("", "", "", "", "", "", ""),
                     id
                 )
 

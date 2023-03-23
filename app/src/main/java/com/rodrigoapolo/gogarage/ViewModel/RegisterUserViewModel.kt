@@ -12,6 +12,7 @@ import com.rodrigoapolo.gogarage.dto.UserEmailDTO
 import com.rodrigoapolo.gogarage.model.EmailModel
 import com.rodrigoapolo.gogarage.retrofit.RetrofitClient
 import com.rodrigoapolo.gogarage.service.EmailService
+import com.rodrigoapolo.gogarage.util.Encryptor
 import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
 import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
 import retrofit2.Call
@@ -136,7 +137,7 @@ class RegisterUserViewModel : ViewModel() {
 
     private fun register(userModel: UserModel) {
         val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
-
+        userModel.password = Encryptor.encryptorString(userModel.password.toString())
         val callback = service.register(userModel)
         callback.enqueue(object : Callback<ResponseRegisterDTO> {
             override fun onResponse(

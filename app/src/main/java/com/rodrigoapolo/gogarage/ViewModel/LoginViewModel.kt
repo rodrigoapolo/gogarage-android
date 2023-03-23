@@ -9,6 +9,7 @@ import com.rodrigoapolo.gogarage.service.UserService
 import com.rodrigoapolo.gogarage.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.dto.UserLoginDTO
 import com.rodrigoapolo.gogarage.retrofit.RetrofitClient
+import com.rodrigoapolo.gogarage.util.Encryptor
 import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,8 +53,8 @@ class LoginViewModel : ViewModel() {
     fun doLogin(email: String, password: String, msg: String) {
         if (_email.value == null && _password.value == null) {
             val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
-
-            val callback = service.authenticate(UserLoginDTO(email, password))
+            val passwordEncryptor = Encryptor.encryptorString(password.toString())
+            val callback = service.authenticate(UserLoginDTO(email, passwordEncryptor))
 
             callback.enqueue(object : Callback<LoginResponseDTO> {
                 override fun onResponse(
