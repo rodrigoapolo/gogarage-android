@@ -18,6 +18,7 @@ import com.google.android.gms.location.LocationServices
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.LoginViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityLoginBinding
+import com.rodrigoapolo.gogarage.util.SecurityPreferences
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -48,7 +49,10 @@ class LoginActivity : AppCompatActivity() {
     private fun requestGPSPremission() {
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ),
             GPS_PERMISSION_CODE
         )
     }
@@ -59,9 +63,13 @@ class LoginActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == GPS_PERMISSION_CODE){
-            if(grantResults.firstOrNull() != PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this,"Por favor aceite a permissão de localização.", Toast.LENGTH_LONG).show()
+        if (requestCode == GPS_PERMISSION_CODE) {
+            if (grantResults.firstOrNull() != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(
+                    this,
+                    "Por favor aceite a permissão de localização.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
@@ -89,12 +97,22 @@ class LoginActivity : AppCompatActivity() {
         viewModel.response().observe(this) {
             getLocationUser()
             binding.progressBar2.visibility = View.VISIBLE
+            SecurityPreferences(applicationContext).storeInt(
+                "id",
+                (viewModel.response().value ?: 0).toInt()
+            )
+
+        }
+
+        viewModel.village().observe(this) {
+            SecurityPreferences(applicationContext).storeString(
+                "village",
+                viewModel.village().value.toString()
+            )
             Timer().schedule(timerTask {
                 val intent = Intent(applicationContext, HomeActivity::class.java)
-                intent.putExtra("village", viewModel.village().value)
-                intent.putExtra("id", viewModel.response().value!!.toLong())
                 startActivity(intent)
-            }, 5000)
+            }, 2000)
         }
     }
 
@@ -107,18 +125,22 @@ class LoginActivity : AppCompatActivity() {
 
         binding.editPassword.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                viewModel.validPassword(binding.editPassword.text.toString(),"Senha inválida")
+                viewModel.validPassword(binding.editPassword.text.toString(), "Senha inválida")
             }
         }
 
         binding.buttonEnter.setOnClickListener {
             if (!isGPSPremissionGranted()) {
                 requestGPSPremission()
-            }else {
+            } else {
                 hideSoftKeyBoard()
                 viewModel.validEmail(binding.editEmail.text.toString(), "E-mail inválido")
-                viewModel.validPassword(binding.editPassword.text.toString(),"Senha inválida")
-                viewModel.doLogin(binding.editEmail.text.toString(), binding.editPassword.text.toString(), "Email ou Senha inválido")
+                viewModel.validPassword(binding.editPassword.text.toString(), "Senha inválida")
+                viewModel.doLogin(
+                    binding.editEmail.text.toString(),
+                    binding.editPassword.text.toString(),
+                    "Email ou Senha inválido"
+                )
             }
         }
 
@@ -150,7 +172,7 @@ class LoginActivity : AppCompatActivity() {
                 val geocoder = Geocoder(this, Locale.getDefault())
                 val addressesList = geocoder.getFromLocation(it.latitude, it.longitude, 1)
                 viewModel.setVillage(formatNeighborhood(addressesList.toString()))
-                Log.i("village", viewModel.village().value.toString())
+                Log.i("village", "HOME"+ viewModel.village().toString())
             }
         }
     }
@@ -166,7 +188,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    companion object{
+    companion object {
         private const val GPS_PERMISSION_CODE = 201
     }
 

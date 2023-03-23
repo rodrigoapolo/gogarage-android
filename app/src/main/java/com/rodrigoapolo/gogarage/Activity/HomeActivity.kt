@@ -14,6 +14,7 @@ import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
 import com.rodrigoapolo.gogarage.model.GarageModel
 import com.rodrigoapolo.gogarage.repository.Repository
 import com.rodrigoapolo.gogarage.ui.home.recyclerview.ItemAdapter
+import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
 
 class HomeActivity : AppCompatActivity() {
@@ -26,9 +27,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
-        val bundle: Bundle? = intent.extras
-        val village = bundle?.getString("village")
-
+        val village = SecurityPreferences(applicationContext).getStoredString("village")
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
 
         listGarageModel = mutableListOf()
@@ -37,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
         val viewModelFactory = com.rodrigoapolo.gogarage.Provider.ViewModelProvider(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
-        if (village != null) {
+        if (village != "") {
             setGarageRecyclerView(village)
             Log.i("village", village + "HOME")
 
@@ -47,8 +46,6 @@ class HomeActivity : AppCompatActivity() {
 
         binding.buttonRegister.setOnClickListener {
             val intent = Intent(this, RegisterGaragemActivity::class.java)
-            val id = bundle!!.getLong("id")
-            intent.putExtra("id",id)
             startActivity(intent)
         }
 

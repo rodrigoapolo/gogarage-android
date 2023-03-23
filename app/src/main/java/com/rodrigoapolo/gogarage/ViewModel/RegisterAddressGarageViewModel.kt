@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.dto.GarageDTO
-import com.rodrigoapolo.gogarage.dto.UserLoginDTO
 import com.rodrigoapolo.gogarage.model.ViaCepModel
 import com.rodrigoapolo.gogarage.retrofit.RetrofitClient
 import com.rodrigoapolo.gogarage.service.GarageService
-import com.rodrigoapolo.gogarage.service.UserService
 import com.rodrigoapolo.gogarage.service.ViaCepService
 import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
 import retrofit2.Call
@@ -84,7 +82,7 @@ class RegisterAddressGarageViewModel : ViewModel() {
                 _cityText.value = response.body()?.uf
             }
             override fun onFailure(call: Call<ViaCepModel>, t: Throwable) {
-                Log.i("requestAPI", t.toString() + " error Address")
+                Log.i("requestAPI", "$t error Address")
             }
         })
     }
@@ -105,30 +103,30 @@ class RegisterAddressGarageViewModel : ViewModel() {
         _city.value = ValidateCompose.camposeNullOrEmpty(value, msg)
     }
 
-    fun doRegister(garage: GarageDTO?) {
+    fun doRegister(garage: GarageDTO) {
         if(_cep.value == null && _number.value == null && _street.value == null &&
             _neighborhood.value == null && _city.value == null){
             registerGarage(garage)
         }
     }
 
-    private fun registerGarage(garage: GarageDTO?) {
+    private fun registerGarage(garage: GarageDTO) {
         val service = RetrofitClient.createService(BuildConfig.PATH, GarageService::class.java)
 
-        val callback = service.registerGarage(garage!!)
-        Log.i("requestAPI", "${garage.toString()}:  Garage")
+        val callback = service.registerGarage(garage)
+        Log.i("requestAPI", "${garage}:  Garage")
         callback.enqueue(object : Callback<GarageDTO>{
             override fun onResponse(call: Call<GarageDTO>, response: Response<GarageDTO>) {
                 if (response.isSuccessful){
                     _register.value = true
-                    Log.i("requestAPI", response.toString() + "  OK register Garage")
+                    Log.i("requestAPI", "$response  OK register Garage")
                 }else{
-                    Log.i("requestAPI", response.toString() + "  erro no if register Garage")
+                    Log.i("requestAPI", "$response  error no if register Garage")
                 }
             }
 
             override fun onFailure(call: Call<GarageDTO>, t: Throwable) {
-                Log.i("requestAPI", t.toString() + " error register Garage")
+                Log.i("requestAPI", "$t error register Garage")
             }
 
         })

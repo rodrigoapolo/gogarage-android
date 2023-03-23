@@ -16,13 +16,13 @@ data class GarageDTO(
     @SerializedName("horarioTermino")
     var horarioTermino: String = "",
     @SerializedName("taxaHorario")
-    var taxaHorario: Double,
+    var taxaHorario: Double = 0.0,
     @SerializedName("valorHora")
-    var valorHora: Double,
+    var valorHora: Double = 0.0,
     @SerializedName("alturaVaga")
-    var alturaVaga: Double,
+    var alturaVaga: Double = 0.0,
     @SerializedName("larguraVaga")
-    var larguraVaga: Double,
+    var larguraVaga: Double = 0.0,
     @SerializedName("latitude")
     var latitude: String = "",
     @SerializedName("longitude")

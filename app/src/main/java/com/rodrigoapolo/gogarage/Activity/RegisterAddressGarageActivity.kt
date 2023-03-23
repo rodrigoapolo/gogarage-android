@@ -19,7 +19,6 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterAddressGarageBinding
     private lateinit var viewModel: RegisterAddressGarageViewModel
 
-    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterAddressGarageBinding.inflate(layoutInflater)
@@ -31,7 +30,7 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
         setObserver()
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    @SuppressLint("NewApi")
     private fun createListenerData() {
         binding.cepEditText.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
@@ -74,8 +73,8 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
             )
             viewModel.validateCity(binding.cityEditText.text.toString(), "Cidade inválida")
 
-            val garage = intent.extras!!.getParcelable<GarageDTO>("garage", GarageDTO::class.java)
-                garage!!.endereco.cep = binding.cepEditText.text.toString()
+            val garage = intent.extras?.getParcelable<GarageDTO>("garage", GarageDTO::class.java) ?: GarageDTO()
+                garage.endereco.cep = binding.cepEditText.text.toString()
                 garage.endereco.numero = binding.numberEditText.text.toString()
                 garage.endereco.complemento = binding.complementEditText.text.toString()
                 garage.endereco.logradouro = binding.streetEditText.text.toString()
@@ -102,6 +101,9 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
         }
         viewModel.neighborhood().observe(this) {
             binding.neighborhoodContainer.helperText = it
+        }
+        viewModel.city().observe(this) {
+            binding.cityContainer.helperText = it
         }
         viewModel.neighborhoodText().observe(this) {
             binding.neighborhoodEditText.setText(it)
