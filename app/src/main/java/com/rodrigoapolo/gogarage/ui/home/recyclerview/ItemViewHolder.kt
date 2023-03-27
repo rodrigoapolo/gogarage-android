@@ -10,6 +10,8 @@ class ItemViewHolder(
 ) : RecyclerView.ViewHolder(itemGarageBinding.root) {
 
     fun bindGarage(garageModel: GarageModel) {
-        itemGarageBinding.txtTitle.text = "Garagem do ${garageModel.pessoa.name }"
+        itemGarageBinding.txtTitle.text = "Garagem do ${garageModel.pessoa.name}"
+        itemGarageBinding.txtEndereco.text = "${garageModel.endereco.logradouro}, ${garageModel.endereco.numero}"
+        itemGarageBinding.txtEnderecoComplement.text = "${garageModel.endereco.bairro}, ${garageModel.endereco.cidade}"
     }
 }

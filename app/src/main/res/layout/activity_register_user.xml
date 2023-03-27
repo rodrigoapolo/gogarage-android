@@ -7,7 +7,7 @@
     android:paddingStart="32dp"
     android:paddingEnd="32dp"
     android:paddingBottom="32dp"
-    tools:context=".Activity.RegisterUserActivity">
+    tools:context=".View.RegisterUserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

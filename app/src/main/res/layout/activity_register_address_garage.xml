@@ -7,7 +7,7 @@
     android:paddingStart="32dp"
     android:paddingEnd="32dp"
     android:paddingBottom="32dp"
-    tools:context=".Activity.RegisterAddressGarageActivity">
+    tools:context=".View.RegisterAddressGarageActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -18,6 +18,6 @@ data class GarageModel(
     @SerializedName("situacao") var situacao: Situacao,
     @SerializedName("latitude") var latitude: String,
     @SerializedName("longitude") var longitude: String,
-    @SerializedName("endereco") var endereco: AddressModel,
+    @SerializedName("enderecoModel") var endereco: AddressModel,
     @SerializedName("pessoa") var pessoa: UserModel
 )

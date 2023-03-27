@@ -1,12 +1,9 @@
-package com.rodrigoapolo.gogarage.Activity
+package com.rodrigoapolo.gogarage.View
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.rodrigoapolo.gogarage.R

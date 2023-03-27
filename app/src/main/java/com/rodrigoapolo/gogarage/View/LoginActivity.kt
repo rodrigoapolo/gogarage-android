@@ -1,4 +1,4 @@
-package com.rodrigoapolo.gogarage.Activity
+package com.rodrigoapolo.gogarage.View
 
 import android.Manifest
 import android.content.Intent

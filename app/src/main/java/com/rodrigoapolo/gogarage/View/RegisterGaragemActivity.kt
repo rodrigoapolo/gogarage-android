@@ -1,11 +1,10 @@
-package com.rodrigoapolo.gogarage.Activity
+package com.rodrigoapolo.gogarage.View
 
 
 import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.rodrigoapolo.gogarage.R

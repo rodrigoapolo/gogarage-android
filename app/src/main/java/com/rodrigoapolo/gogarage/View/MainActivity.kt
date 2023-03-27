@@ -1,4 +1,4 @@
-package com.rodrigoapolo.gogarage.Activity
+package com.rodrigoapolo.gogarage.View
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
