@@ -5,31 +5,23 @@ import com.google.android.material.textfield.TextInputEditText
 
 abstract class ValidateCompose {
 
-    companion object{
-        fun validEmailPatternsEmpty(edit: TextInputEditText): String? {
-            val emailText = edit.text.toString()
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches() || emailText.isEmpty()) {
-                return "E-mail inválido"
+    companion object {
+         fun validEmailPatternsEmpty(email: String, msg: String): String? {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()) {
+                return msg
             }
             return null
         }
 
-        fun validPasswordNullEmpty(edit: TextInputEditText): String?{
-            if (edit.text.isNullOrEmpty()) {
-                return "Senha inválida"
-            }
-            return null
-        }
-
-        fun valueNullOrEmpty(value: String): String?{
+        fun camposeNullOrEmpty(value: String, msg: String): String? {
             if (value.isNullOrEmpty()) {
-                return "Valor inválido"
+                return msg
             }
             return null
         }
-        fun camposeNullOrEmpty(value: String, msg: String): String?{
-            if (value.isNullOrEmpty()) {
+
+        fun validConfirmPassword(password: String, passwordConfirm: String, msg: String): String? {
+            if (password != passwordConfirm) {
                 return msg
             }
             return null

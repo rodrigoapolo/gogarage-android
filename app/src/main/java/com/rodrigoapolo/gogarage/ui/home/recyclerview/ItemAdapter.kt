@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rodrigoapolo.gogarage.databinding.ItemGarageBinding
-import com.rodrigoapolo.gogarage.model.garage.Garage
+import com.rodrigoapolo.gogarage.model.GarageModel
 
-class ItemAdapter(private val garage: List<Garage>) : RecyclerView.Adapter<ItemViewHolder>() {
+
+class ItemAdapter(private val garageModel: List<GarageModel>) : RecyclerView.Adapter<ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val from = LayoutInflater.from(parent.context)
@@ -15,9 +16,9 @@ class ItemAdapter(private val garage: List<Garage>) : RecyclerView.Adapter<ItemV
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bindGarage(garage[position])
+        holder.bindGarage(garageModel[position])
     }
 
-    override fun getItemCount(): Int = garage.size
+    override fun getItemCount(): Int = garageModel.size
 
 }
