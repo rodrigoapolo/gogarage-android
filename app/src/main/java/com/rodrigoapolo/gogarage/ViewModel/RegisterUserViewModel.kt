@@ -129,7 +129,7 @@ class RegisterUserViewModel : ViewModel() {
         if (_email.value == null && _password.value == null && _passwordConfirm.value == null &&
             _name.value == null && _cpf.value == null && _phone.value == null
         ) {
-            register(UserModel(null, name, email, password, phone, true, cpf, ""))
+            register(UserModel(0, name, email, password, phone, true, cpf, ""))
         } else {
             _response.value = false
         }

@@ -13,14 +13,13 @@ import com.rodrigoapolo.gogarage.ViewModel.HomeViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
 import com.rodrigoapolo.gogarage.model.GarageModel
 import com.rodrigoapolo.gogarage.repository.Repository
-import com.rodrigoapolo.gogarage.ui.home.recyclerview.ItemAdapter
+import com.rodrigoapolo.gogarage.recyclerview.GarageAdapter
 import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: HomeViewModel
-
     private lateinit var binding: ActivityHomeBinding
     private lateinit var listGarageModel: MutableList<GarageModel>
 
@@ -59,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
                 listGarageModel = response.body() as MutableList<GarageModel>
                 binding.recyclerView.apply {
                     layoutManager = GridLayoutManager(applicationContext, 1)
-                    adapter = ItemAdapter(listGarageModel)
+                    adapter = GarageAdapter(listGarageModel)
                 }
             }
         }

@@ -18,11 +18,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".View.ShowGarageActivity"
+            android:exported="false" />
+        <activity
             android:name=".View.RegisterAddressGarageActivity"
             android:exported="false" />
         <activity
             android:name=".View.RegisterGaragemActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".View.HomeActivity"
             android:exported="false">
