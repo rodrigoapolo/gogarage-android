@@ -1,22 +1,45 @@
 package com.rodrigoapolo.gogarage.ViewModel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rodrigoapolo.gogarage.model.GarageModel
-import com.rodrigoapolo.gogarage.repository.Repository
+import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
+import com.rodrigoapolo.gogarage.service.GarageService
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel(private val repository: Repository) : ViewModel() {
+class HomeViewModel() : ViewModel() {
 
-    var responseGarageModel: MutableLiveData<Response<List<GarageModel>>> = MutableLiveData()
+    private var _garages: MutableLiveData<List<GarageModel>> = MutableLiveData()
 
-    fun getGarage(village: String) {
-        viewModelScope.launch {
-            val response = repository.getGarage(village)
-            responseGarageModel.value = response
-        }
+    val garages: LiveData<List<GarageModel>> = _garages
+
+    fun setGarage(village: String) {
+        val service = ApiGoGarage.createService(GarageService::class.java)
+        val callback = service.getGarage(village)
+
+        callback.enqueue(object : Callback<List<GarageModel>> {
+            override fun onResponse(
+                call: Call<List<GarageModel>>,
+                response: Response<List<GarageModel>>
+            ) {
+                if (response.isSuccessful) {
+                    _garages.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<List<GarageModel>>, t: Throwable) {
+                Log.i("APIGARAGE", t.toString() + " error pegar garagem")
+            }
+
+        })
+
+
     }
 
 }

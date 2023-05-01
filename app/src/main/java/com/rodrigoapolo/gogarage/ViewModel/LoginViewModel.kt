@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.service.UserService
 import com.rodrigoapolo.gogarage.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.dto.UserLoginDTO

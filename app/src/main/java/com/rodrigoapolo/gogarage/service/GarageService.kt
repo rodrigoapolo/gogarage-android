@@ -17,7 +17,7 @@ interface GarageService {
     ): Call<GarageDTO>
 
     @GET("/garagens/get-bairro/{bairro}")
-    suspend fun getGarage(
+    fun getGarage(
         @Path("bairro") bairro: String
-    ) : Response<List<GarageModel>>
+    ) : Call<List<GarageModel>>
 }

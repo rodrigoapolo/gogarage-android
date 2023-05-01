@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.HomeViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
-import com.rodrigoapolo.gogarage.model.GarageModel
-import com.rodrigoapolo.gogarage.repository.Repository
 import com.rodrigoapolo.gogarage.recyclerview.GarageAdapter
 import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
@@ -21,45 +19,47 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var listGarageModel: MutableList<GarageModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val village = SecurityPreferences(applicationContext).getStoredString("village")
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
 
-        listGarageModel = mutableListOf()
-
-        val repository = Repository()
-        val viewModelFactory = com.rodrigoapolo.gogarage.Provider.ViewModelProvider(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        createListenerData()
 
         if (village != "") {
-            setGarageRecyclerView(village)
+            setRecyclerViewGarage()
+            getRecyclerViewgarage()
             Log.i("village", village + "HOME")
 
         } else {
             Toast.makeText(this, "Não encontramos sua localização", Toast.LENGTH_LONG).show()
         }
 
-        binding.buttonRegister.setOnClickListener {
-            val intent = Intent(this, RegisterGaragemActivity::class.java)
-            startActivity(intent)
-        }
+
 
         return setContentView(binding.root)
     }
 
-    private fun setGarageRecyclerView(village: String) {
-        viewModel.getGarage(village)
-        viewModel.responseGarageModel.observe(this) { response ->
-            if (response.isSuccessful) {
-                listGarageModel = response.body() as MutableList<GarageModel>
-                binding.recyclerView.apply {
-                    layoutManager = GridLayoutManager(applicationContext, 1)
-                    adapter = GarageAdapter(listGarageModel)
-                }
+    private fun createListenerData() {
+        binding.buttonRegister.setOnClickListener {
+            val intent = Intent(this, RegisterGaragemActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun getRecyclerViewgarage() {
+        val village = SecurityPreferences(applicationContext).getStoredString("village")
+        viewModel.setGarage(village)
+    }
+
+    private fun setRecyclerViewGarage() {
+        viewModel.garages.observe(this){
+            binding.recyclerView.apply {
+                layoutManager = GridLayoutManager(applicationContext, 1)
+                adapter = GarageAdapter(viewModel.garages.value!!)
             }
         }
     }

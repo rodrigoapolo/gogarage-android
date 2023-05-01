@@ -30,8 +30,4 @@ interface UserService {
         @Body userModel: UserModel
     ) : Call<ResponseRegisterDTO>
 
-    @GET("/garagens/get-bairro/{bairro}")
-    suspend fun getGarage(
-        @Path("bairro") bairro: String
-    ) : Response<List<GarageModel>>
 }
