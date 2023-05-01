@@ -4,8 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.RegisterAddressGarageViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityRegisterAddressGarageBinding
@@ -109,10 +114,25 @@ class RegisterAddressGarageActivity : AppCompatActivity() {
             binding.cityEditText.setText(it)
         }
         viewModel.register().observe(this) {
-            if (it) {
-                val intent = Intent(applicationContext, HomeActivity::class.java)
-                startActivity(intent)
+            if(it){
+                createDialog()
             }
         }
+
+    }
+    private fun createDialog() {
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_register_success, null, false)
+        view.findViewById<TextView>(R.id.text_message).text = "Parabéns, você concluiu o cadastro da sua Garagem. Torcemos que você tenha uma excelente experiência em nossa plataforma."
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(view)
+        view.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
+            successRegister()
+        }
+        dialog.show()
+    }
+    private fun successRegister() {
+        val intent = Intent(applicationContext, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

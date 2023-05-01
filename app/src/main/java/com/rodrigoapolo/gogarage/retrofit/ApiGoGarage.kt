@@ -10,7 +10,7 @@ class ApiGoGarage {
     companion object {
        private lateinit var INSTANCE: Retrofit
 
-        fun getRetrofitInstance() : Retrofit {
+        private fun getRetrofitInstance() : Retrofit {
             val http = OkHttpClient.Builder().build()
 
             if (!::INSTANCE.isInitialized) {

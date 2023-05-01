@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.service.UserService
 import com.rodrigoapolo.gogarage.dto.ResponseRegisterDTO
 import com.rodrigoapolo.gogarage.model.UserModel
@@ -13,8 +12,8 @@ import com.rodrigoapolo.gogarage.model.EmailModel
 import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.service.EmailService
 import com.rodrigoapolo.gogarage.util.Encryptor
-import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCPF
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

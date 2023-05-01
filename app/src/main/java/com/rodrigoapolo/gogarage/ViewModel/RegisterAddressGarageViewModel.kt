@@ -4,14 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.dto.GarageDTO
 import com.rodrigoapolo.gogarage.model.ViaCepModel
 import com.rodrigoapolo.gogarage.retrofit.ApiViaCep
 import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.service.GarageService
 import com.rodrigoapolo.gogarage.service.ViaCepService
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

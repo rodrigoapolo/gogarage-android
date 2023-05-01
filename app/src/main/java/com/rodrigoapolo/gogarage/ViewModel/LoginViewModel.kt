@@ -9,7 +9,7 @@ import com.rodrigoapolo.gogarage.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.dto.UserLoginDTO
 import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.util.Encryptor
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -3,7 +3,7 @@ package com.rodrigoapolo.gogarage.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 
 class RegisterGaragemViewModel : ViewModel() {
 
