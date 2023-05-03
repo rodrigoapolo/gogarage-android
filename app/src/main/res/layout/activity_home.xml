@@ -41,14 +41,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_register"
-        android:text="Castrar Garagem"
+        android:text="Cadastrar Garagem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:padding="16dp"
         android:backgroundTint="@color/green_200"
+        android:background="@drawable/round_border_button"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
