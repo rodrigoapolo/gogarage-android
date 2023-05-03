@@ -36,7 +36,7 @@ class ShowGarageActivity : AppCompatActivity() {
     }
 
     private fun createListenerData() {
-        binding.timeStart.setOnClickListener {
+        binding.textTimeGarageStart.setOnClickListener {
 
             var hour = 0
             var minutes = 0
@@ -52,7 +52,7 @@ class ShowGarageActivity : AppCompatActivity() {
             timePickerDialog.show()
         }
 
-        binding.timeEnd.setOnClickListener {
+        binding.textTimeGarageEnd.setOnClickListener {
 
             var hour = 0
             var minutes = 0
@@ -87,10 +87,10 @@ class ShowGarageActivity : AppCompatActivity() {
 
 
         viewModel.timeStart.observe(this){
-            binding.timeStart.text = it
+            binding.textTimeGarageStart.text = it
         }
         viewModel.timeEnd.observe(this){
-            binding.timeEnd.text = it
+            binding.textTimeGarageEnd.text = it
         }
         viewModel.erroTime.observe(this){
             binding.textErroTime.text = it

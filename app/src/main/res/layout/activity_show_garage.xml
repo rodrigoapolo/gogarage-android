@@ -6,268 +6,246 @@
     android:layout_height="match_parent"
     tools:context=".View.ShowGarageActivity">
 
-    <RelativeLayout
-        android:id="@+id/layout_Vaga"
+    <View
+        android:id="@+id/view_carde_garage"
+        android:layout_width="match_parent"
+        android:layout_height="248dp"
+        android:background="@drawable/round_border_below"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/img_photo_user"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_baseline_person_24"
+        app:layout_constraintBottom_toBottomOf="@id/view_carde_garage"
+        app:layout_constraintEnd_toEndOf="@id/view_carde_garage"
+        app:layout_constraintStart_toStartOf="@id/view_carde_garage"
+        app:layout_constraintTop_toTopOf="@id/view_carde_garage"
+        app:tint="@color/white" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="90dp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@id/view_carde_garage"
+        app:layout_constraintStart_toStartOf="@id/view_carde_garage"
+        app:layout_constraintTop_toBottomOf="@id/img_photo_user"
+        tools:text="Rodrigo Santos" />
+
+    <TextView
+        android:id="@+id/text_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Endereço"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_carde_garage" />
+
+    <TextView
+        android:id="@+id/text_garage_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:backgroundTint="@color/green_200"
-        android:background="@drawable/round_border">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/round_border">
+        app:layout_constraintTop_toTopOf="@id/text_address"
+        tools:text="Rua Frei Fracisco" />
 
-            <ImageView
-                android:id="@+id/img_photo_user"
-                android:layout_width="match_parent"
-                android:src="@drawable/ic_baseline_person_24"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                app:tint="@color/white" />
+    <TextView
+        android:id="@+id/text_horarioInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Horario"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_address"
+        app:layout_constraintTop_toBottomOf="@id/text_address" />
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@id/img_photo_user"
-                android:background="@color/white"
-                android:layout_alignParentStart="true"/>
+    <TextView
+        android:id="@+id/text_garage_horario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_garage_address"
+        app:layout_constraintTop_toTopOf="@id/text_horarioInicio"
+        tools:text="8:00 - 22:00" />
 
-            <TextView
-                android:id="@+id/text_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="22dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/line"
-                android:layout_alignParentStart="true"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Endereço" />
+    <TextView
+        android:id="@+id/text_valorHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Valor Hora"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_horarioInicio"
+        app:layout_constraintTop_toBottomOf="@id/text_horarioInicio" />
 
-            <TextView
-                android:id="@+id/text_garage_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_address"
-                android:layout_alignStart="@id/text_address"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto"
-                tools:text="Rua Frei Fracisco" />
+    <TextView
+        android:id="@+id/text_garage_valorHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_garage_horario"
+        app:layout_constraintTop_toTopOf="@id/text_valorHora"
+        tools:text="R$ 20,00" />
 
-            <TextView
-                android:id="@+id/text_horarioInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_garage_address"
-                android:layout_alignStart="@id/text_garage_address"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Horario" />
+    <TextView
+        android:id="@+id/text_valor_adicional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Valor Adicional"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_valorHora"
+        app:layout_constraintTop_toBottomOf="@id/text_valorHora" />
 
-            <TextView
-                android:id="@+id/text_garage_horario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_horarioInicio"
-                android:layout_alignStart="@id/text_horarioInicio"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto"
-                tools:text="8:00 - 22:00" />
+    <TextView
+        android:id="@+id/text_garage_valor_adicional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_garage_valorHora"
+        app:layout_constraintTop_toTopOf="@id/text_valor_adicional"
+        tools:text="R$ 5,00" />
 
-            <TextView
-                android:id="@+id/text_valorHora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_garage_horario"
-                android:layout_alignStart="@id/text_garage_horario"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Valor Hora" />
+    <TextView
+        android:id="@+id/text_size_garage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Tamanho da Vaga"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_valor_adicional"
+        app:layout_constraintTop_toBottomOf="@id/text_valor_adicional" />
 
-            <TextView
-                android:id="@+id/text_garage_valorHora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_valorHora"
-                android:layout_alignStart="@id/text_valorHora"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto"
-                tools:text="R$ 20,00" />
+    <TextView
+        android:id="@+id/text_garage_size_garage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_garage_valor_adicional"
+        app:layout_constraintTop_toTopOf="@id/text_size_garage"
+        tools:text="Altura: 2 Largura: 2" />
 
-            <TextView
-                android:id="@+id/text_valor_adicional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_garage_valorHora"
-                android:layout_alignStart="@id/text_garage_valorHora"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Valor Adicional" />
+    <TextView
+        android:id="@+id/text_cobertura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_garage_size_garage"
+        android:layout_alignStart="@id/text_garage_size_garage"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Cobertura"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_size_garage"
+        app:layout_constraintTop_toBottomOf="@id/text_size_garage" />
 
-            <TextView
-                android:id="@+id/text_garage_valor_adicional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_valor_adicional"
-                android:layout_alignStart="@id/text_valor_adicional"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto"
-                tools:text="R$ 5,00" />
+    <TextView
+        android:id="@+id/text_garage_cobertura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_garage_size_garage"
+        app:layout_constraintTop_toTopOf="@id/text_cobertura"
+        tools:text="Sim" />
 
-            <TextView
-                android:id="@+id/text_size_garage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_garage_valor_adicional"
-                android:layout_alignStart="@id/text_garage_valor_adicional"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Tamanho da Vaga" />
+    <TextView
+        android:id="@+id/text_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Horario de entrada"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_cobertura"
+        app:layout_constraintTop_toBottomOf="@id/text_cobertura" />
 
-            <TextView
-                android:id="@+id/text_garage_size_garage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_size_garage"
-                android:layout_alignStart="@id/text_size_garage"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto"
-                tools:text="Altura: 2 Largura: 2" />
+    <TextView
+        android:id="@+id/text_time_garage_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_700"
+        android:fontFamily="@font/roboto_bold"
+        android:hint="Inicio"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_garage_cobertura"
+        app:layout_constraintTop_toTopOf="@id/text_start_time" />
 
-            <TextView
-                android:id="@+id/text_cobertura"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_garage_size_garage"
-                android:layout_alignStart="@id/text_garage_size_garage"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Cobertura" />
+    <TextView
+        android:id="@+id/text_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Horario de Saida"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/text_start_time"
+        app:layout_constraintTop_toBottomOf="@id/text_start_time" />
 
-            <TextView
-                android:id="@+id/text_garage_cobertura"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_cobertura"
-                android:layout_alignStart="@id/text_cobertura"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto"
-                tools:text="Sim" />
+    <TextView
+        android:id="@+id/text_time_garage_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_700"
+        android:fontFamily="@font/roboto_bold"
+        android:hint="Saida"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/text_time_garage_start"
+        app:layout_constraintTop_toTopOf="@id/text_end_time" />
 
-            <TextView
-                android:id="@+id/text_name_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/text_garage_cobertura"
-                android:layout_alignStart="@id/text_garage_cobertura"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_black_italic"
-                android:text="Horario" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@id/text_name_time"
-                android:layout_below="@id/text_name_time"
-                android:layout_marginBottom="8dp"
-                android:layout_alignParentEnd="true"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/time_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/teal_700"
-                    android:fontFamily="@font/roboto_light"
-                    android:hint="Inicio"
-                    android:padding="16dp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/time_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/teal_700"
-                    android:fontFamily="@font/roboto_light"
-                    android:hint="Saida"
-                    android:padding="16dp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-        </RelativeLayout>
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/text_erro_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_Vaga"
-        app:layout_constraintStart_toStartOf="@id/layout_Vaga"
-        app:layout_constraintEnd_toEndOf="@id/layout_Vaga"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_black_italic"
-        tools:text="Erro"
         android:gravity="center"
-        android:textColor="@color/red"/>
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/button_vaga"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Erro" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_vaga"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/green_200"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/round_border_button"
         android:fontFamily="@font/roboto_bold"
         android:padding="16dp"
         android:text="Reservar"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/layout_Vaga"
-        app:layout_constraintStart_toStartOf="@id/layout_Vaga"
-        app:layout_constraintEnd_toEndOf="@id/layout_Vaga"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
