@@ -78,13 +78,12 @@ class ShowGarageActivity : AppCompatActivity() {
 
     private fun setObserver() {
         Log.i("textoGarage","$garage")
-        binding.textGarageAddress.text = "${garage?.endereco?.logradouro} - ${garage?.endereco?.bairro}, ${garage?.endereco?.numero} "
+        binding.textGarageAddress.text = "${garage?.endereco?.logradouro}, ${garage?.endereco?.numero} "
         binding.textGarageHorario.text = "${garage?.horarioInicio} - ${garage?.horarioTermino} "
         binding.textGarageValorHora.text = "R$ ${garage?.valorHora}"
         binding.textGarageValorAdicional.text = "R$ ${garage?.taxaHorario}"
-        binding.textGarageSizeGarage.text = "Altura: ${garage?.alturaVaga} Largura: ${garage?.larguraVaga}"
+        binding.textGarageSizeGarage.text = "Alt: ${garage?.alturaVaga} Lar: ${garage?.larguraVaga}"
         binding.textGarageCobertura.text = if(garage?.cobertura ?: false) "Sim" else "Não"
-
 
         viewModel.timeStart.observe(this){
             binding.textTimeGarageStart.text = it
