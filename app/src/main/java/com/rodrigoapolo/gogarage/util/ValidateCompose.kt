@@ -1,7 +1,6 @@
-package com.rodrigoapolo.gogarage.util.validate
+package com.rodrigoapolo.gogarage.util
 
 import android.util.Patterns
-import com.google.android.material.textfield.TextInputEditText
 
 abstract class ValidateCompose {
 

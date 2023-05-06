@@ -4,13 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.service.UserService
 import com.rodrigoapolo.gogarage.dto.LoginResponseDTO
 import com.rodrigoapolo.gogarage.dto.UserLoginDTO
-import com.rodrigoapolo.gogarage.retrofit.RetrofitClient
+import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.util.Encryptor
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,7 +51,7 @@ class LoginViewModel : ViewModel() {
 
     fun doLogin(email: String, password: String, msg: String) {
         if (_email.value == null && _password.value == null) {
-            val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
+            val service = ApiGoGarage.createService(UserService::class.java)
             val passwordEncryptor = Encryptor.encryptorString(password.toString())
             val callback = service.authenticate(UserLoginDTO(email, passwordEncryptor))
 

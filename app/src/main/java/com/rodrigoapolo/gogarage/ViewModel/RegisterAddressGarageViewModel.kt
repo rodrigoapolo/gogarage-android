@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.dto.GarageDTO
 import com.rodrigoapolo.gogarage.model.ViaCepModel
-import com.rodrigoapolo.gogarage.retrofit.RetrofitClient
+import com.rodrigoapolo.gogarage.retrofit.ApiViaCep
+import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.service.GarageService
 import com.rodrigoapolo.gogarage.service.ViaCepService
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,8 +70,7 @@ class RegisterAddressGarageViewModel : ViewModel() {
     }
 
     private fun cepRequest(cep: String) {
-        val service =
-            RetrofitClient.createService(BuildConfig.PATHVIACEP, ViaCepService::class.java)
+        val service = ApiViaCep.createService(ViaCepService::class.java)
 
         val callback = service.address(cep)
 
@@ -111,7 +110,7 @@ class RegisterAddressGarageViewModel : ViewModel() {
     }
 
     private fun registerGarage(garage: GarageDTO) {
-        val service = RetrofitClient.createService(BuildConfig.PATH, GarageService::class.java)
+        val service = ApiGoGarage.createService(GarageService::class.java)
 
         val callback = service.registerGarage(garage)
         Log.i("requestAPI", "${garage}:  Garage")

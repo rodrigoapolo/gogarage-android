@@ -1,70 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/card_garage"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="@color/blue_500"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    tools:showIn="@layout/activity_home">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="3dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/img_photo_user"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_gravity="center|start"
-            android:orientation="horizontal">
+            android:layout_alignTop="@id/img_photo_user"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/img_photo_user"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Garagem do José"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/img_photo_user"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_person_24"/>
+        <TextView
+            android:id="@+id/txt_endereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_title"
+            android:layout_alignStart="@id/txt_title"
+            android:fontFamily="@font/roboto_italic"
+            android:text="Rua Governador Mario Covas, 194"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp">
+        <TextView
+            android:id="@+id/txt_endereco_complement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_endereco"
+            android:layout_alignStart="@id/txt_endereco"
+            android:fontFamily="@font/roboto_italic"
+            android:text="Vila Mariana, São Paulo"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/txt_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:text="Garagem do José"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_bold"/>
-
-                <TextView
-                    android:id="@+id/txt_endereco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:text="Rua Governador Mario Covas, 194"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_thin"/>
-
-                <TextView
-                    android:id="@+id/txt_endereco_complement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vila Mariana, São Paulo"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_thin"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

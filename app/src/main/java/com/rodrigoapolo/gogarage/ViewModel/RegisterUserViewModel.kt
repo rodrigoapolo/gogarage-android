@@ -4,17 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rodrigoapolo.gogarage.BuildConfig
 import com.rodrigoapolo.gogarage.service.UserService
 import com.rodrigoapolo.gogarage.dto.ResponseRegisterDTO
 import com.rodrigoapolo.gogarage.model.UserModel
 import com.rodrigoapolo.gogarage.dto.UserEmailDTO
 import com.rodrigoapolo.gogarage.model.EmailModel
-import com.rodrigoapolo.gogarage.retrofit.RetrofitClient
+import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.service.EmailService
 import com.rodrigoapolo.gogarage.util.Encryptor
-import com.rodrigoapolo.gogarage.util.validate.ValidateCPF
-import com.rodrigoapolo.gogarage.util.validate.ValidateCompose
+import com.rodrigoapolo.gogarage.util.ValidateCPF
+import com.rodrigoapolo.gogarage.util.ValidateCompose
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -103,7 +102,7 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     private fun validateEmailRequest(email: String, msgValidateRequest: String) {
-        val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
+        val service = ApiGoGarage.createService(UserService::class.java)
 
         val callback = service.validateEmail(UserEmailDTO(email))
 
@@ -129,14 +128,14 @@ class RegisterUserViewModel : ViewModel() {
         if (_email.value == null && _password.value == null && _passwordConfirm.value == null &&
             _name.value == null && _cpf.value == null && _phone.value == null
         ) {
-            register(UserModel(null, name, email, password, phone, true, cpf, ""))
+            register(UserModel(0, name, email, password, phone, true, cpf, ""))
         } else {
             _response.value = false
         }
     }
 
     private fun register(userModel: UserModel) {
-        val service = RetrofitClient.createService(BuildConfig.PATH, UserService::class.java)
+        val service = ApiGoGarage.createService(UserService::class.java)
         userModel.password = Encryptor.encryptorString(userModel.password.toString())
         val callback = service.register(userModel)
         callback.enqueue(object : Callback<ResponseRegisterDTO> {
@@ -159,7 +158,7 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     fun sendingEmail(id: Long?, email: String?, name: String?) {
-        val service = RetrofitClient.createService(BuildConfig.PATH, EmailService::class.java)
+        val service = ApiGoGarage.createService(EmailService::class.java)
         val callback = service.sendingEmail(
             EmailModel(
             id,

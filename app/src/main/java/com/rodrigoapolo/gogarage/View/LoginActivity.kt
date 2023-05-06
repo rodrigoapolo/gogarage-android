@@ -112,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
             Timer().schedule(timerTask {
                 val intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(intent)
+                finish()
             }, 2000)
         }
     }

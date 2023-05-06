@@ -1,4 +1,4 @@
-package com.rodrigoapolo.gogarage.util.validate
+package com.rodrigoapolo.gogarage.util
 
 abstract class ValidateCPF {
     companion object {
