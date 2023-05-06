@@ -1,5 +1,7 @@
 package com.rodrigoapolo.gogarage.recyclerview
 
-interface nItemClickListener {
-    fun onItemClick()
+import com.rodrigoapolo.gogarage.model.GarageModel
+
+interface OnItemClickListener {
+    fun onItemClick(garage: GarageModel)
 }

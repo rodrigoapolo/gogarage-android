@@ -2,6 +2,7 @@ package com.rodrigoapolo.gogarage.View
 
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -87,9 +88,11 @@ class ShowGarageActivity : AppCompatActivity() {
 
         viewModel.timeStart.observe(this){
             binding.textTimeGarageStart.text = it
+            binding.textTimeGarageStart.setTextColor(Color.GRAY)
         }
         viewModel.timeEnd.observe(this){
             binding.textTimeGarageEnd.text = it
+            binding.textTimeGarageEnd.setTextColor(Color.GRAY)
         }
         viewModel.erroTime.observe(this){
             binding.textErroTime.text = it

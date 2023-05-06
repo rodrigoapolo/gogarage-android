@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.HomeViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
+import com.rodrigoapolo.gogarage.dto.GarageDTO
+import com.rodrigoapolo.gogarage.model.GarageModel
 import com.rodrigoapolo.gogarage.recyclerview.GarageAdapter
+import com.rodrigoapolo.gogarage.recyclerview.OnItemClickListener
 import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
@@ -44,8 +47,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun createListenerData() {
-        binding.buttonRegister.setOnClickListener {
-            val intent = Intent(this, RegisterGaragemActivity::class.java)
+        binding.imaUser.setOnClickListener{
+            val intent = Intent(this, PerfilActivity::class.java)
             startActivity(intent)
         }
     }
@@ -59,8 +62,28 @@ class HomeActivity : AppCompatActivity() {
         viewModel.garages.observe(this){
             binding.recyclerView.apply {
                 layoutManager = GridLayoutManager(applicationContext, 1)
-                adapter = GarageAdapter(viewModel.garages.value!!)
+                adapter = GarageAdapter(viewModel.garages.value!!, this@HomeActivity)
             }
         }
+    }
+
+    override fun onItemClick(garageModel: GarageModel) {
+        val garage: GarageDTO = GarageDTO(
+            garageModel.id,
+            garageModel.cobertura,
+            garageModel.horarioInicio,
+            garageModel.horarioTermino,
+            garageModel.taxaHorario,
+            garageModel.valorHora,
+            garageModel.alturaVaga,
+            garageModel.larguraVaga,
+            "",
+            "",
+            garageModel.endereco,
+            garageModel.pessoa.id
+        )
+        val intent = Intent(this, ShowGarageActivity::class.java)
+        val putExtra = intent.putExtra("garage", garage)
+        startActivities(arrayOf(intent))
     }
 }
