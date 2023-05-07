@@ -3,6 +3,7 @@ package com.rodrigoapolo.gogarage.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -37,7 +38,7 @@ class PerfilActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun setObserver() {
-        //TODO
+        viewModel.setIdUser(SecurityPreferences(applicationContext).getStoredInt("id").toLong())
     }
 
     private fun createListenerDate() {
@@ -45,8 +46,6 @@ class PerfilActivity : AppCompatActivity(), OnItemClickListener {
             val intent = Intent(this, RegisterGaragemActivity::class.java)
             startActivity(intent)
         }
-        val id = SecurityPreferences(applicationContext).getStoredInt("id").toLong()
-        viewModel.setGarageUser(id)
     }
 
     private fun setRecyclerViewGarage() {
@@ -59,11 +58,31 @@ class PerfilActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun getRecyclerViewgarage() {
-        //TODO
+        viewModel.setGarageUser()
     }
 
     override fun onItemClick(garage: GarageModel) {
-        //TODO
+        createDialog(garage)
+    }
+
+    private fun createDialog(garage: GarageModel) {
+        val view = layoutInflater.inflate(R.layout.delete_garage, null, false)
+        view.findViewById<TextView>(R.id.text_endereco).text = "${garage.endereco.logradouro}, ${garage.endereco.numero}"
+         val dialog = BottomSheetDialog(this)
+        dialog.setContentView(view)
+        view.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
+            viewModel.deleteGarage(garage.id)
+            viewModel.delete.observe(this){
+                if(it){
+                    viewModel.setGarageUser()
+                    dialog.cancel()
+                }
+            }
+        }
+        view.findViewById<Button>(R.id.btn_delete).setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.show()
     }
 
 }

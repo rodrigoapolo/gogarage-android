@@ -13,13 +13,17 @@ import retrofit2.Response
 
 class PerfilViewModel(): ViewModel(){
 
+    private var _idUser: MutableLiveData<Long> = MutableLiveData()
     private var _garages: MutableLiveData<List<GarageModel>> = MutableLiveData()
+    private var _delete: MutableLiveData<Boolean> = MutableLiveData()
 
+    val idUser: LiveData<Long> = _idUser
     val garages: LiveData<List<GarageModel>> = _garages
+    val delete: LiveData<Boolean> = _delete
 
-    fun setGarageUser(idUser: Long) {
+    fun setGarageUser() {
         val service = ApiGoGarage.createService(GarageService::class.java)
-        val callback = service.getGarageUser(idUser)
+        val callback = service.getGarageUser(idUser.value!!)
 
         callback.enqueue(object : Callback<List<GarageModel>> {
             override fun onResponse(
@@ -36,6 +40,30 @@ class PerfilViewModel(): ViewModel(){
             }
 
         })
+    }
+
+    fun deleteGarage(id: Long) {
+        val service = ApiGoGarage.createService(GarageService::class.java)
+        val callback = service.deleteGarage(id)
+        callback.enqueue(object : Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful) {
+                    _delete.value = true
+                }
+            }
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.i("APIGARAGE", t.toString() + " error pegar garagem")
+            }
+
+        })
+
+    }
+
+    fun setIdUser(idUser: Long) {
+        _idUser.value = idUser
     }
 
 }
