@@ -20,4 +20,9 @@ interface GarageService {
     fun getGarage(
         @Path("bairro") bairro: String
     ) : Call<List<GarageModel>>
+
+    @GET("/garagens/pessoa/{idPessoa}")
+    fun getGarageUser(
+        @Path("idPessoa") idPessoa: Long
+    ): Call<List<GarageModel>>
 }

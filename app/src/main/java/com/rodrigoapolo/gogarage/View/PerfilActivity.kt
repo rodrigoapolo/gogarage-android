@@ -3,13 +3,21 @@ package com.rodrigoapolo.gogarage.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.PerfilViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityPerfilBinding
+import com.rodrigoapolo.gogarage.model.GarageModel
+import com.rodrigoapolo.gogarage.recyclerview.GarageAdapter
+import com.rodrigoapolo.gogarage.recyclerview.OnItemClickListener
+import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
-class PerfilActivity : AppCompatActivity() {
+class PerfilActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var binding: ActivityPerfilBinding
     private lateinit var viewModel: PerfilViewModel
@@ -24,10 +32,12 @@ class PerfilActivity : AppCompatActivity() {
 
         setObserver()
         createListenerDate()
+        setRecyclerViewGarage()
+        getRecyclerViewgarage()
     }
 
     private fun setObserver() {
-        TODO("Not yet implemented")
+        //TODO
     }
 
     private fun createListenerDate() {
@@ -35,7 +45,25 @@ class PerfilActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterGaragemActivity::class.java)
             startActivity(intent)
         }
+        val id = SecurityPreferences(applicationContext).getStoredInt("id").toLong()
+        viewModel.setGarageUser(id)
     }
 
+    private fun setRecyclerViewGarage() {
+        viewModel.garages.observe(this){
+            binding.recyclerView.apply {
+                layoutManager = GridLayoutManager(applicationContext, 1)
+                adapter = GarageAdapter(viewModel.garages.value!!, this@PerfilActivity)
+            }
+        }
+    }
+
+    private fun getRecyclerViewgarage() {
+        //TODO
+    }
+
+    override fun onItemClick(garage: GarageModel) {
+        //TODO
+    }
 
 }
