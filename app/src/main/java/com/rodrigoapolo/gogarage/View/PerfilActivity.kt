@@ -3,7 +3,6 @@ package com.rodrigoapolo.gogarage.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -39,9 +38,40 @@ class PerfilActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun setObserver() {
         viewModel.setIdUser(SecurityPreferences(applicationContext).getStoredInt("id").toLong())
+        viewModel.getUser()
+        viewModel.msgError.observe(this){
+            binding.textErro.text = it
+        }
+        viewModel.name.observe(this){
+            binding.editName.setText(it)
+        }
+        viewModel.email.observe(this){
+            binding.editUserEmail.setText(it)
+        }
+        viewModel.phone.observe(this){
+            binding.editUserPhone.setText(it)
+        }
     }
 
     private fun createListenerDate() {
+        binding.editUserEmail.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                viewModel.validEmail(binding.editUserEmail.text.toString(),
+                    "E-mail inválido", "E-mail já cadastrado")
+            }
+        }
+        binding.editName.setOnFocusChangeListener { v, focused ->
+            if(!focused){
+                viewModel.validateName(binding.editName.text.toString(),
+                    binding.editUserPhone.text.toString(), "Nome inválido")
+            }
+        }
+        binding.editUserPhone.setOnFocusChangeListener { v, focused ->
+            if(!focused){
+                viewModel.validatePhone(binding.editName.text.toString(),
+                    binding.editUserPhone.text.toString(), "Telefone inválido")
+            }
+        }
         binding.buttonRegister.setOnClickListener {
             val intent = Intent(this, RegisterGaragemActivity::class.java)
             startActivity(intent)
