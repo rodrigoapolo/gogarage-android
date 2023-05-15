@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rodrigoapolo.gogarage.dto.GarageDTO
-import com.rodrigoapolo.gogarage.model.AgendamentoModel
+import com.rodrigoapolo.gogarage.dto.AgendamentoDTO
 import com.rodrigoapolo.gogarage.retrofit.ApiGoGarage
 import com.rodrigoapolo.gogarage.service.AgendamentosService
 import retrofit2.Call
@@ -37,15 +37,15 @@ class ShowGarageViewModel : ViewModel(){
         if (_timeEnd.value != null && _timeStart.value != null){
             val service = ApiGoGarage.createService(AgendamentosService::class.java)
 
-            val agendamento = AgendamentoModel(id, garage.id, _timeStart.value.toString(),
+            val agendamento = AgendamentoDTO(id, garage.id, _timeStart.value.toString(),
                 _timeEnd.value.toString()
             )
             val callback = service.register(agendamento)
 
-            callback.enqueue(object : Callback<AgendamentoModel>{
+            callback.enqueue(object : Callback<AgendamentoDTO>{
                 override fun onResponse(
-                    call: Call<AgendamentoModel>,
-                    response: Response<AgendamentoModel>
+                    call: Call<AgendamentoDTO>,
+                    response: Response<AgendamentoDTO>
                 ) {
                     if (response.isSuccessful) {
                          _register.value = true
@@ -55,7 +55,7 @@ class ShowGarageViewModel : ViewModel(){
                     }
                 }
 
-                override fun onFailure(call: Call<AgendamentoModel>, t: Throwable) {
+                override fun onFailure(call: Call<AgendamentoDTO>, t: Throwable) {
                     Log.i("APIGARAGE", t.toString() + " error no registar agendamento")
                 }
 

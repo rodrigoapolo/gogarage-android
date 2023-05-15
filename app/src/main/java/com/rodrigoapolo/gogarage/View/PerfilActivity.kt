@@ -13,11 +13,11 @@ import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.PerfilViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityPerfilBinding
 import com.rodrigoapolo.gogarage.model.GarageModel
-import com.rodrigoapolo.gogarage.recyclerview.GarageAdapter
-import com.rodrigoapolo.gogarage.recyclerview.OnItemClickListener
+import com.rodrigoapolo.gogarage.recyclerview.garage.GarageAdapter
+import com.rodrigoapolo.gogarage.recyclerview.garage.OnItemClickListenerGarage
 import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
-class PerfilActivity : AppCompatActivity(), OnItemClickListener {
+class PerfilActivity : AppCompatActivity(), OnItemClickListenerGarage {
 
     private lateinit var binding: ActivityPerfilBinding
     private lateinit var viewModel: PerfilViewModel
@@ -54,6 +54,15 @@ class PerfilActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun createListenerDate() {
+        binding.imaReserve.setOnClickListener {
+            val intent = Intent(this, ReserveActivity::class.java)
+            startActivity(intent)
+        }
+        binding.imgArrow.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         binding.editUserEmail.setOnFocusChangeListener { _, focused ->
             if (!focused) {
                 viewModel.validEmail(binding.editUserEmail.text.toString(),

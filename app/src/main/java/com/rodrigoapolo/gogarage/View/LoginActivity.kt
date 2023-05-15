@@ -172,8 +172,9 @@ class LoginActivity : AppCompatActivity() {
             if (it != null) {
                 val geocoder = Geocoder(this, Locale.getDefault())
                 val addressesList = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                Log.i("village", " telaLogin bairro: $addressesList")
                 viewModel.setVillage(formatNeighborhood(addressesList.toString()))
-                Log.i("village", "HOME"+ viewModel.village().toString())
+                Log.i("village", " tela  Login"+ viewModel.village().toString())
             }
         }
     }

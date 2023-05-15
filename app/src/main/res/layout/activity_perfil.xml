@@ -14,6 +14,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/img_arrow"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/baseline_arrow_back_24"/>
+
+    <ImageView
+        android:id="@+id/ima_reserve"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/baseline_calendar_month_24"/>
+
 
     <ImageView
         android:id="@+id/img_photo_user"
@@ -38,7 +56,6 @@
         app:layout_constraintEnd_toEndOf="@id/view_carde_garage"
         app:layout_constraintStart_toStartOf="@id/view_carde_garage"
         app:layout_constraintTop_toBottomOf="@id/img_photo_user"
-        android:text="Rodrigo Apolo"
         tools:text="Rodrigo Santos" />
 
     <TextView

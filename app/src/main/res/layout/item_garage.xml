@@ -60,6 +60,7 @@
             android:text="Vila Mariana, São Paulo"
             android:textColor="@color/white"
             android:textSize="12sp" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
