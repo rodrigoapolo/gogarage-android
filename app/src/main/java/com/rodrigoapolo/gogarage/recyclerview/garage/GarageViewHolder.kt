@@ -5,6 +5,9 @@ import com.rodrigoapolo.gogarage.databinding.ItemGarageBinding
 import com.rodrigoapolo.gogarage.model.GarageModel
 
 
+
+
+
 class GarageViewHolder(private val itemGarageBinding: ItemGarageBinding, private val onClick: OnItemClickListenerGarage
 ) : RecyclerView.ViewHolder(itemGarageBinding.root){
 
