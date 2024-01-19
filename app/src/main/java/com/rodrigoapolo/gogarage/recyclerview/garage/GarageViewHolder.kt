@@ -1,16 +1,14 @@
-package com.rodrigoapolo.gogarage.recyclerview
+package com.rodrigoapolo.gogarage.recyclerview.garage
 
-import android.content.Intent
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.rodrigoapolo.gogarage.View.RegisterUserActivity
-import com.rodrigoapolo.gogarage.View.ShowGarageActivity
 import com.rodrigoapolo.gogarage.databinding.ItemGarageBinding
-import com.rodrigoapolo.gogarage.dto.GarageDTO
 import com.rodrigoapolo.gogarage.model.GarageModel
 
 
-class GarageViewHolder(private val itemGarageBinding: ItemGarageBinding, private val onClick: OnItemClickListener
+
+
+
+class GarageViewHolder(private val itemGarageBinding: ItemGarageBinding, private val onClick: OnItemClickListenerGarage
 ) : RecyclerView.ViewHolder(itemGarageBinding.root){
 
 

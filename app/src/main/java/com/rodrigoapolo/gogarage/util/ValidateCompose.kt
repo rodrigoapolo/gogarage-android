@@ -1,4 +1,4 @@
-package com.rodrigoapolo.gogarage.util
+package com.arnusia.shopping.util
 
 import android.util.Patterns
 

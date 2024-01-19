@@ -12,13 +12,14 @@ import com.rodrigoapolo.gogarage.R
 import com.rodrigoapolo.gogarage.ViewModel.HomeViewModel
 import com.rodrigoapolo.gogarage.databinding.ActivityHomeBinding
 import com.rodrigoapolo.gogarage.dto.GarageDTO
+import com.rodrigoapolo.gogarage.model.AgendamentoModel
 import com.rodrigoapolo.gogarage.model.GarageModel
-import com.rodrigoapolo.gogarage.recyclerview.GarageAdapter
-import com.rodrigoapolo.gogarage.recyclerview.OnItemClickListener
+import com.rodrigoapolo.gogarage.recyclerview.garage.GarageAdapter
+import com.rodrigoapolo.gogarage.recyclerview.garage.OnItemClickListenerGarage
 import com.rodrigoapolo.gogarage.util.SecurityPreferences
 
 
-class HomeActivity : AppCompatActivity(), OnItemClickListener {
+class HomeActivity : AppCompatActivity(), OnItemClickListenerGarage {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
@@ -31,11 +32,12 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_500)
 
         createListenerData()
+        setRecyclerViewGarage()
+        getRecyclerViewgarage()
+        Log.i("village", village + " HOME")
 
         if (village != "") {
-            setRecyclerViewGarage()
-            getRecyclerViewgarage()
-            Log.i("village", village + "HOME")
+
 
         } else {
             Toast.makeText(this, "Não encontramos sua localização", Toast.LENGTH_LONG).show()
@@ -67,20 +69,20 @@ class HomeActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
-    override fun onItemClick(garageModel: GarageModel) {
+    override fun onItemClick(garage: GarageModel) {
         val garage: GarageDTO = GarageDTO(
-            garageModel.id,
-            garageModel.cobertura,
-            garageModel.horarioInicio,
-            garageModel.horarioTermino,
-            garageModel.taxaHorario,
-            garageModel.valorHora,
-            garageModel.alturaVaga,
-            garageModel.larguraVaga,
+            garage.id,
+            garage.cobertura,
+            garage.horarioInicio,
+            garage.horarioTermino,
+            garage.taxaHorario,
+            garage.valorHora,
+            garage.alturaVaga,
+            garage.larguraVaga,
             "",
             "",
-            garageModel.endereco,
-            garageModel.pessoa.id
+            garage.endereco,
+            garage.pessoa.id
         )
         val intent = Intent(this, ShowGarageActivity::class.java)
         val putExtra = intent.putExtra("garage", garage)

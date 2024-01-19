@@ -28,6 +28,9 @@ class HomeViewModel() : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     _garages.value = response.body()
+                    Log.i("village", "bairro: $village HOMEViewModel lista: ${response.body().toString()}")
+                }else{
+                    Log.i("village", "bairro: $village HOMEViewModel msg: ${response.message()}  error: ${response.code()}")
                 }
             }
 

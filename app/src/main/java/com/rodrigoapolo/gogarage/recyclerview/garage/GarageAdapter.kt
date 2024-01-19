@@ -1,6 +1,5 @@
-package com.rodrigoapolo.gogarage.recyclerview
+package com.rodrigoapolo.gogarage.recyclerview.garage
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +7,7 @@ import com.rodrigoapolo.gogarage.databinding.ItemGarageBinding
 import com.rodrigoapolo.gogarage.model.GarageModel
 
 
-class GarageAdapter(private val garageModel: List<GarageModel>, private val onClickListener: OnItemClickListener) :
+class GarageAdapter(private val garageModel: List<GarageModel>, private val onClickListener: OnItemClickListenerGarage) :
     RecyclerView.Adapter<GarageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GarageViewHolder {
