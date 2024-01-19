@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/card_garage"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="@color/blue_500"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    tools:showIn="@layout/activity_home">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/img_photo_user"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/img_photo_user"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/img_photo_user"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Garagem do José"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_endereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_title"
+            android:layout_alignStart="@id/txt_title"
+            android:fontFamily="@font/roboto_italic"
+            android:text="Rua Governador Mario Covas, 194"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_endereco_complement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_endereco"
+            android:layout_alignStart="@id/txt_endereco"
+            android:fontFamily="@font/roboto_italic"
+            android:text="Vila Mariana, São Paulo"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

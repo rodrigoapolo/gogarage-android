@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">GoGarage</string>
+    <string name="title_go">Go</string>
+    <string name="title_garage">Garage</string>
+    <string name="title_two">Liberdade e segurança</string>
+    <string name="botton_lets_start">Vamos Começar</string>
+    <string name="enter">Entrar</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="forgot_password">Esqueceu sua senha?</string>
+    <string name="register">Cadastre-se</string>
+    <string name="txt_register">Ainda não tem conta?</string>
+    <string name="welcome">Olá, queremos te conhecer</string>
+    <string name="confirm_password">Confirme sua senha</string>
+    <string name="name">Nome</string>
+    <string name="cpf">CPF</string>
+    <string name="gender">Gênero</string>
+    <string name="telephone">Telefone</string>
+    <string name="confirm">Confirmar</string>
+    <string name="have_count">Já tem contar?</string>
+    <string name="register_success">Registrado com sucesso</string>
+    <string name="message_success">Parabéns, você concluiu o cadastro. \n Torcemos que você tenha uma excelente experiência em nossa plataforma.</string>
+    <string name="continuar">continuar</string>
+    <string name="garagens_disponiveis">Garagens Disponíveis</string>
 </resources>
